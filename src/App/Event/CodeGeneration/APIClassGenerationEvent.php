@@ -1,0 +1,26 @@
+<?php
+
+declare(strict_types=1);
+
+namespace Tequila\K8S\SchemaGenerator\App\Event\CodeGeneration;
+
+use Tequila\K8S\SchemaGenerator\Codegen\Context;
+use Tequila\K8S\SchemaGenerator\Codegen\Definition\ApiObjectDefinition;
+use Tequila\K8S\SchemaGenerator\Codegen\Type\ClassName;
+
+class APIClassGenerationEvent extends AbstractClassGenerationEvent
+{
+    private ApiObjectDefinition $definition;
+
+    public function __construct(ClassName $className, Context $context, ApiObjectDefinition $definition)
+    {
+        $this->definition = $definition;
+
+        parent::__construct($className, $context);
+    }
+
+    public function definition(): ApiObjectDefinition
+    {
+        return $this->definition;
+    }
+}

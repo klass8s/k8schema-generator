@@ -1,0 +1,53 @@
+<?php
+
+declare(strict_types=1);
+
+namespace Tequila\K8S\SchemaGenerator\Codegen\Definition;
+
+use Tequila\K8S\SchemaGenerator\JsonSchema\TypesMap;
+
+final readonly class ApiObjectDefinitionsMap implements \IteratorAggregate
+{
+    /**
+     * @var \ArrayObject<string, ApiObjectDefinition>
+     */
+    private \ArrayObject $definitionsMap;
+
+    private function __construct(array $definitionsMap)
+    {
+        $this->definitionsMap = new \ArrayObject($definitionsMap);
+    }
+
+    public function get(string $name): ApiObjectDefinition
+    {
+        return $this->definitionsMap[$name];
+    }
+
+    public function has(string $name): bool
+    {
+        return $this->definitionsMap->offsetExists($name);
+    }
+
+    /**
+     * @return \ArrayObject<string, ApiObjectDefinition>
+     */
+    public function getIterator(): \Traversable
+    {
+        return $this->definitionsMap;
+    }
+
+    public static function fromTypesMap(TypesMap $typesMap): self
+    {
+        $map = [];
+        foreach ($typesMap as $name => $type) {
+            $map[$name] = ApiObjectDefinition::fromObjectType($name, $type);
+        }
+
+        return new self($map);
+    }
+
+    public static function fromArray(array $definitionsMap): self
+    {
+        return new self($definitionsMap);
+    }
+}
