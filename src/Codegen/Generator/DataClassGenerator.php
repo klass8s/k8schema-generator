@@ -15,7 +15,7 @@ use Tequila\K8S\SchemaGenerator\JsonSchema\DataType\ObjectType;
 
 final class DataClassGenerator extends AbstractGenerator
 {
-    private readonly DataClassGenerationEvent $generationEvent;
+    private DataClassGenerationEvent $generationEvent;
 
     public function generateFromDefinitionName(string $definitionName, ObjectType $type, Context $context): PHPClass
     {

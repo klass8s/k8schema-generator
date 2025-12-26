@@ -15,7 +15,7 @@ final readonly class JsonSchemaService
     public function typesMap(array $jsonSchema): TypesMap
     {
         $map = array_map(
-            static fn (array $definition) => $this->typesService->determineType($definition),
+            fn (array $definition) => $this->typesService->determineType($definition),
             $jsonSchema['definitions'],
         );
 

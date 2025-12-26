@@ -116,7 +116,9 @@ abstract class AbstractGenerator
      */
     protected function defineConstructor(ClassType $class, array $properties): void
     {
-        $constructor = $class->addMethod('__construct');
+        $constructor = $class->hasMethod('__construct')
+            ? $class->getMethod('__construct')
+            : $class->addMethod('__construct');
 
         foreach ($properties as $propertyDefinition) {
             if ($propertyDefinition->skipped()) {

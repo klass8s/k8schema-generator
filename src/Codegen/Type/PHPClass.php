@@ -73,14 +73,26 @@ final class PHPClass
 
     private function addUsesFromImplements(): self
     {
-        $implements = $this->class->getImplements();
+        $implements = $this->class instanceof ClassType
+            ? $this->class->getImplements()
+            : $this->class->getExtends();
+
         $newImplements = [];
         foreach ($implements as $fqcn) {
             $className = ClassName::fromFQCN($fqcn);
-            $this->useClass($className);
-            $newImplements[] = $className->shortName();
+            if ($className->shortName() !== $this->name->shortName()) {
+                $this->useClass($className);
+                $newImplements[] = $className->shortName();
+            } else {
+                $newImplements[] = $fqcn;
+            }
         }
-        $this->class->setImplements($newImplements);
+
+        if ($this->class instanceof ClassType) {
+            $this->class->setImplements($newImplements);
+        } elseif ($this->class instanceof InterfaceType) {
+            $this->class->setExtends($newImplements);
+        }
 
         return $this;
     }

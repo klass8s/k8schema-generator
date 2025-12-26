@@ -48,7 +48,7 @@ final readonly class RemoveObjectSettersSubscriber implements EventSubscriberInt
             $newGetter = $getter->cloneWithName($newGetterName);
             $methods = $classType->getMethods();
             $methods[] = $newGetter;
-            $classType->setMethods($methods);
+            $classType->setMethods(array_values($methods));
             $classType->removeMethod($getterName);
         }
     }
