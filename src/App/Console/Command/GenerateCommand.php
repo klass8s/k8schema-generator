@@ -8,11 +8,10 @@ use Symfony\Component\Console\Attribute\AsCommand;
 use Tequila\K8S\SchemaGenerator\Codegen\K8SCodeGenerationService;
 
 #[AsCommand(
-    name: 'k8s:generate:php',
+    name: 'generate',
     description: 'Generates PHP classes from Kubernetes json schema',
-    aliases: ['k8s:gen:php']
 )]
-class K8SGeneratePhpCommand extends AbstractCodeGenerationCommand
+class GenerateCommand extends AbstractCodeGenerationCommand
 {
     public function __construct(K8SCodeGenerationService $service)
     {

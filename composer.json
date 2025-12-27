@@ -10,6 +10,7 @@
         "ext-ctype": "*",
         "ext-iconv": "*",
         "ext-json": "*",
+        "composer-runtime-api": "^2.2",
         "guzzlehttp/psr7": "^2.0",
         "knplabs/github-api": "^3.0",
         "nette/php-generator": "^4.2",

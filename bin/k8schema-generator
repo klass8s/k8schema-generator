@@ -1,31 +1,32 @@
 #!/usr/bin/env php
 <?php
 
-use Symfony\Bundle\FrameworkBundle\Console\Application;
+declare(strict_types=1);
+
+use Symfony\Component\ErrorHandler\Debug;
+use Symfony\Component\Dotenv\Dotenv;
+use Tequila\K8S\SchemaGenerator\App\Console\AppConsole;
 use Tequila\K8S\SchemaGenerator\Kernel;
 
-if (isset($_composer_autoload_path) && file_exists($_composer_autoload_path)) {
-    require_once $_composer_autoload_path;
+$autoloadPath = $_composer_autoload_path ?? dirname(__DIR__) . '/vendor/autoload.php';
+require_once $autoloadPath;
 
-    $autoloadRuntimePath = dirname($_composer_autoload_path).'/autoload_runtime.php';
-    if (!is_file($autoloadRuntimePath)) {
-        throw new LogicException('Symfony Runtime is missing. Try running "composer require symfony/runtime".');
-    }
-    require_once $autoloadRuntimePath;
-} else {
-    if (!is_dir(dirname(__DIR__).'/vendor')) {
-        throw new LogicException('Dependencies are missing. Try running "composer install".');
-    }
+$env = $_SERVER['APP_ENV'] ?? $_ENV['APP_ENV'] ?? 'prod';
+$debug = (bool) ($_SERVER['APP_DEBUG'] ?? $_ENV['APP_DEBUG'] ?? ($env !== 'prod'));
 
-    if (!is_file(dirname(__DIR__).'/vendor/autoload_runtime.php')) {
-        throw new LogicException('Symfony Runtime is missing. Try running "composer require symfony/runtime".');
-    }
-
-    require_once dirname(__DIR__).'/vendor/autoload_runtime.php';
+if ($debug) {
+    umask(0000);
+    Debug::enable();
 }
 
-return function (array $context) {
-    $kernel = new Kernel($context['APP_ENV'], (bool) $context['APP_DEBUG']);
+if (is_file(dirname(__DIR__).'/.env')) {
+    new Dotenv()->bootEnv(dirname(__DIR__).'/.env');
+}
 
-    return new Application($kernel);
-};
+$kernel = new Kernel($env, $debug);
+
+$app = new AppConsole($kernel);
+$app->setName('k8s-schema-generator');
+$app->setVersion('dev-main');
+
+exit($app->run());

@@ -9,15 +9,14 @@ use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
-use Symfony\Component\Console\Style\SymfonyStyle;
 use Tequila\K8S\SchemaGenerator\App\Console\UI\ModernStyle;
 use Tequila\K8S\SchemaGenerator\App\Kubernetes\JsonSchemaVersionsService;
 
 #[AsCommand(
-    name: 'k8s:schema:versions',
-    description: 'This command retrieves the latest json schema versions for a number of Kubernetes minor versions. This json schema versions then can be used to retrieve the latest json schema for some minor Kubernetes version. For example the latest json schema version for Kubernetes v1.16 is v1.16.4.'
+    name: 'schema:versions',
+    description: 'This command retrieves the latest json schema versions for a number of Kubernetes minor versions.'
 )]
-class K8SSchemaVersionsCommand extends Command
+class SchemaVersionsCommand extends Command
 {
     private const string ARGUMENT_NAME = 'numberOfVersions';
     private const int DEFAULT_NUMBER_OF_VERSIONS = 4;

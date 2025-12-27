@@ -9,17 +9,18 @@ use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
-use Symfony\Component\Console\Question\ChoiceQuestion;
-use Symfony\Component\Console\Style\SymfonyStyle;
 use Symfony\Contracts\HttpClient\Exception\ExceptionInterface;
 use Symfony\Contracts\HttpClient\HttpClientInterface;
+use Tequila\K8S\SchemaGenerator\App\Console\UI\ModernStyle;
 
 #[AsCommand(
-    name: 'k8s:schema:fetch',
+    name: 'schema:fetch',
     description: 'Fetches Kubernetes json schema and saves to file',
 )]
-class K8SSchemaFetchCommand extends Command
+class SchemaFetchCommand extends Command
 {
+    private const string K8S_VERSION_PATTERN = '/^v(\d+)\.(\d+)$/';
+    private const string ARGUMENT_K8S_VERSION = 'k8sVersion';
     private const string ARGUMENT_FILE_PATH = 'filePath';
 
     public function __construct(
@@ -34,17 +35,35 @@ class K8SSchemaFetchCommand extends Command
     {
         $this
             ->addArgument(
+                self::ARGUMENT_K8S_VERSION,
+                InputArgument::REQUIRED,
+                'A major and minor version of Kubernetes API, e.g. "v1.35"',
+            )
+            ->addArgument(
                 self::ARGUMENT_FILE_PATH,
                 InputArgument::REQUIRED,
                 'Path where to save fetched json schema',
-            );
+            )
+        ;
     }
 
     public function execute(InputInterface $input, OutputInterface $output): int
     {
-        $io = new SymfonyStyle($input, $output);
+        $io = new ModernStyle($input, $output);
 
-        $k8sVersion = $this->askForK8sVersion($io);
+        $k8sVersion = trim($input->getArgument(self::ARGUMENT_K8S_VERSION));
+        if (empty($k8sVersion)) {
+            $io->error('Kubernetes version cannot be empty');
+        }
+
+        if (!preg_match(self::K8S_VERSION_PATTERN, $k8sVersion)) {
+            $io->error(sprintf('Kubernetes version "%s" is invalid', $k8sVersion));
+        }
+
+        if (!array_key_exists($k8sVersion, $this->jsonSchemaVersions)) {
+            $io->error(sprintf('Kubernetes version "%s" is not supported. Supported versions are: "%s".', $k8sVersion, implode('", "', array_keys($this->jsonSchemaVersions))));
+        }
+
         $schemaVersion = $this->jsonSchemaVersions[$k8sVersion];
         $jsonSchemaUrl = str_replace('{version}', $schemaVersion, $this->jsonSchemaUrlTemplate);
 
@@ -56,19 +75,6 @@ class K8SSchemaFetchCommand extends Command
         $io->writeln('');
 
         return self::SUCCESS;
-    }
-
-    private function askForK8sVersion(SymfonyStyle $io): string
-    {
-        $question = new ChoiceQuestion(
-            'Please select your version of Kubernetes',
-            array_keys($this->jsonSchemaVersions)
-        );
-        $question->setErrorMessage(
-            sprintf('Please select variants from 0 to %d', \count($this->jsonSchemaVersions) - 1)
-        );
-
-        return $io->askQuestion($question);
     }
 
     private function fetchJson(string $jsonSchemaUrl): string

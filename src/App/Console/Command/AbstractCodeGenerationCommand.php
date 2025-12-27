@@ -13,15 +13,12 @@ use Symfony\Component\Console\Question\Question;
 use Symfony\Component\Console\Style\SymfonyStyle;
 use Tequila\K8S\SchemaGenerator\App\Console\UI\ModernStyle;
 use Tequila\K8S\SchemaGenerator\Codegen\CodeGenerationServiceInterface;
-use Tequila\K8S\SchemaGenerator\Codegen\Type\ClassName;
 
 abstract class AbstractCodeGenerationCommand extends Command
 {
     private const string ARGUMENT_SCHEMA_PATH = 'json-schema-path';
     private const string OPTION_NAMESPACE_PREFIX = 'namespace-prefix';
     private const string OPTION_OUTPUT_DIR = 'output-dir';
-    private const string OPTION_RESOURCE_INTERFACE = 'resource-interface';
-    private const string OPTION_RESOURCE_LIST_INTERFACE = 'resource-list-interface';
 
     public function __construct(protected readonly CodeGenerationServiceInterface $service)
     {
@@ -46,16 +43,6 @@ abstract class AbstractCodeGenerationCommand extends Command
                 mode: InputOption::VALUE_REQUIRED,
                 description: 'Path to directory, where generated classes will be saved'
             )
-            ->addOption(
-                name: self::OPTION_RESOURCE_INTERFACE,
-                mode: InputOption::VALUE_REQUIRED,
-                description: 'PHP interface FQCN, that all generated API classes will implement. If specified, interface itself is not generated. If empty, will be deducted from namespace prefix'
-            )
-            ->addOption(
-                name: self::OPTION_RESOURCE_LIST_INTERFACE,
-                mode: InputOption::VALUE_REQUIRED,
-                description: 'PHP interface FQCN, that all generated API class lists will implement. If specified, interface itself is not generated. If empty, will be deducted from namespace prefix'
-            )
         ;
     }
 
@@ -65,10 +52,6 @@ abstract class AbstractCodeGenerationCommand extends Command
 
         $namespacePrefix = $this->getNamespacePrefix($input, $io);
         $outputDir = $this->getOutputDir($input, $io);
-        $resourceInterface = $input->getOption(self::OPTION_RESOURCE_INTERFACE);
-        $resourceInterface = $resourceInterface ? ClassName::fromFQCN($resourceInterface) : null;
-        $resourceListInterface = $input->getOption(self::OPTION_RESOURCE_LIST_INTERFACE);
-        $resourceListInterface = $resourceListInterface ? ClassName::fromFQCN($resourceListInterface) : null;
 
         $jsonSchemaPath = $input->getArgument(self::ARGUMENT_SCHEMA_PATH);
         if (!file_exists($jsonSchemaPath)) {
@@ -78,8 +61,8 @@ abstract class AbstractCodeGenerationCommand extends Command
             return self::FAILURE;
         }
 
-        $json = \file_get_contents($jsonSchemaPath);
-        $schema = \json_decode($json, true);
+        $json = file_get_contents($jsonSchemaPath);
+        $schema = json_decode($json, true);
         if (null === $schema && JSON_ERROR_NONE !== json_last_error()) {
             $io->error(sprintf('File "%s" does not contain valid json', $jsonSchemaPath));
             $io->writeln('');
@@ -87,11 +70,9 @@ abstract class AbstractCodeGenerationCommand extends Command
             return self::FAILURE;
         }
 
-        $this->service->generate($schema, $namespacePrefix, $outputDir, $resourceInterface, $resourceListInterface);
+        $this->service->generate($schema, $namespacePrefix, $outputDir);
 
-        $io->success(
-            \sprintf('PHP code was saved to directory "%s"', $outputDir)
-        );
+        $io->success(sprintf('PHP code was saved to directory "%s"', $outputDir));
         $io->writeln('');
 
         return self::SUCCESS;
