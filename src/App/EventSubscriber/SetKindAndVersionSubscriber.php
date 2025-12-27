@@ -48,11 +48,15 @@ class SetKindAndVersionSubscriber implements EventSubscriberInterface
         }
 
         $class = $event->classType();
-        $class->addConstant(
-            self::CONSTANT_API_VERSION,
-            $this->apiVersionForClass($className)
-        );
-        $class->addConstant(self::CONSTANT_KIND, $this->kindForClass($className));
+        $class
+            ->addConstant(
+                self::CONSTANT_API_VERSION,
+                $this->apiVersionForClass($className)
+            )
+            ->setType('string');
+        $class
+            ->addConstant(self::CONSTANT_KIND, $this->kindForClass($className))
+            ->setType('string');
 
         $event->addJsonProperty(
             'apiVersion',
