@@ -6,6 +6,12 @@ use Tequila\K8S\SchemaGenerator\Kernel;
 
 if (isset($_composer_autoload_path) && file_exists($_composer_autoload_path)) {
     require_once $_composer_autoload_path;
+
+    $autoloadRuntimePath = dirname($_composer_autoload_path).'/autoload_runtime.php';
+    if (!is_file($autoloadRuntimePath)) {
+        throw new LogicException('Symfony Runtime is missing. Try running "composer require symfony/runtime".');
+    }
+    require_once $autoloadRuntimePath;
 } else {
     if (!is_dir(dirname(__DIR__).'/vendor')) {
         throw new LogicException('Dependencies are missing. Try running "composer install".');
@@ -14,6 +20,8 @@ if (isset($_composer_autoload_path) && file_exists($_composer_autoload_path)) {
     if (!is_file(dirname(__DIR__).'/vendor/autoload_runtime.php')) {
         throw new LogicException('Symfony Runtime is missing. Try running "composer require symfony/runtime".');
     }
+
+    require_once dirname(__DIR__).'/vendor/autoload_runtime.php';
 }
 
 return function (array $context) {
