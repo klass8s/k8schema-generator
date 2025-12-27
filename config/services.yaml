@@ -1,19 +1,19 @@
 parameters:
-    tequila.k8s_schema_generator.json_schema.url_template: 'https://raw.githubusercontent.com/yannh/kubernetes-json-schema/master/{version}/_definitions.json'
-    tequila.k8s_schema_generator.json_schema.versions: '%env(json:K8S_JSON_SCHEMA_VERSIONS)%'
+    tequila.k8schema_generator.json_schema.url_template: 'https://raw.githubusercontent.com/yannh/kubernetes-json-schema/master/{version}/_definitions.json'
+    tequila.k8schema_generator.json_schema.versions: '%env(json:K8S_JSON_SCHEMA_VERSIONS)%'
     # Sometimes metadata type defined as `object` in some CRDs, for example, in CRDs, defined by Upbound AWS Provider.
     # Specifying env var `K8S_METADATA_CLASS` will replace `metadata` property type in such
     # classes to the value of this env var (probably FQCN). This may be needed if you don't want to generate
     # a new class for each metadata property in dozens of CRD classes, or if you want your classes to be compatible
     # with some library, for example, with `tequila/k8s-schema`, where `APIResourceInterface` requires
     # method `metadata()` to return it's "own" `ObjectMeta` instance
-    tequila.k8s_schema_generator.crd_metadata_class: '%env(default::K8S_CRD_METADATA_CLASS)%'
+    tequila.k8schema_generator.crd_metadata_class: '%env(default::K8S_CRD_METADATA_CLASS)%'
     # You may want to replace the default generated `ObjectMeta` class type for `metadata` properties
     # with some predefined type, for example, `Tequila\K8S\Schema\ObjectMeta` for your classes
     # to be compatible with `tequila/k8s-schema` and `tequila/k8s` libraries.
     # Specifying this env var `K8S_METADATA_CLASS` will result in a type of `metadata` properties
     # to be replaced with the value of this env var (probably FQCN)
-    tequila.k8s_schema_generator.metadata_class: '%env(default::K8S_METADATA_CLASS)%'
+    tequila.k8schema_generator.metadata_class: '%env(default::K8S_METADATA_CLASS)%'
 
 services:
     _defaults:
@@ -21,10 +21,10 @@ services:
         autoconfigure: true
         bind:
             $srcDir: '%kernel.project_dir%/src'
-            $jsonSchemaUrlTemplate: '%tequila.k8s_schema_generator.json_schema.url_template%'
-            $jsonSchemaVersions: '%tequila.k8s_schema_generator.json_schema.versions%'
-            $crdMetadataClass: '%tequila.k8s_schema_generator.crd_metadata_class%'
-            $metadataClass: '%tequila.k8s_schema_generator.crd_metadata_class%'
+            $jsonSchemaUrlTemplate: '%tequila.k8schema_generator.json_schema.url_template%'
+            $jsonSchemaVersions: '%tequila.k8schema_generator.json_schema.versions%'
+            $crdMetadataClass: '%tequila.k8schema_generator.crd_metadata_class%'
+            $metadataClass: '%tequila.k8schema_generator.crd_metadata_class%'
     _instanceof:
         Tequila\K8S\SchemaGenerator\JsonSchema\DataType\Factory\DataTypeFactoryInterface:
             tags: [ !php/const Tequila\K8S\SchemaGenerator\App\DependencyInjection\Tags::DATA_TYPE_FACTORY ]

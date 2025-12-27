@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Tequila\K8S\SchemaGenerator\App\Command;
+namespace Tequila\K8S\SchemaGenerator\App\Console\Command;
 
 use Symfony\Component\Console\Attribute\AsCommand;
 use Tequila\K8S\SchemaGenerator\Codegen\K8SCodeGenerationService;

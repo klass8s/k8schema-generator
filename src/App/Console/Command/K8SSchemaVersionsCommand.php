@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Tequila\K8S\SchemaGenerator\App\Command;
+namespace Tequila\K8S\SchemaGenerator\App\Console\Command;
 
 use Symfony\Component\Console\Attribute\AsCommand;
 use Symfony\Component\Console\Command\Command;
@@ -10,6 +10,7 @@ use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Style\SymfonyStyle;
+use Tequila\K8S\SchemaGenerator\App\Console\UI\ModernStyle;
 use Tequila\K8S\SchemaGenerator\App\Kubernetes\JsonSchemaVersionsService;
 
 #[AsCommand(
@@ -40,7 +41,7 @@ class K8SSchemaVersionsCommand extends Command
 
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
-        $io = new SymfonyStyle($input, $output);
+        $io = new ModernStyle($input, $output);
         $numberOfVersions = $input->getArgument(self::ARGUMENT_NAME);
 
         $map = $this->service->latestVersionsMap($numberOfVersions);
