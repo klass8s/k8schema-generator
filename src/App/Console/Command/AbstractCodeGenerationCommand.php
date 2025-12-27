@@ -56,7 +56,6 @@ abstract class AbstractCodeGenerationCommand extends Command
         $jsonSchemaPath = $input->getArgument(self::ARGUMENT_SCHEMA_PATH);
         if (!file_exists($jsonSchemaPath)) {
             $io->error(sprintf('Json schema path "%s" does not exist.', $jsonSchemaPath));
-            $io->writeln('');
 
             return self::FAILURE;
         }
@@ -65,7 +64,6 @@ abstract class AbstractCodeGenerationCommand extends Command
         $schema = json_decode($json, true);
         if (null === $schema && JSON_ERROR_NONE !== json_last_error()) {
             $io->error(sprintf('File "%s" does not contain valid json', $jsonSchemaPath));
-            $io->writeln('');
 
             return self::FAILURE;
         }
@@ -73,7 +71,6 @@ abstract class AbstractCodeGenerationCommand extends Command
         $this->service->generate($schema, $namespacePrefix, $outputDir);
 
         $io->success(sprintf('PHP code was saved to directory "%s"', $outputDir));
-        $io->writeln('');
 
         return self::SUCCESS;
     }

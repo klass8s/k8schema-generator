@@ -57,11 +57,6 @@ final class ModernStyle extends SymfonyStyle
         }
     }
 
-    public function kv(string $key, string $value): void
-    {
-        $this->writeln(sprintf('<k>%s</k>: %s', OutputFormatter::escape($key), OutputFormatter::escape($value)));
-    }
-
     public function note(string|array $message): void
     {
         $this->writeln(sprintf('<info>%s</info> <muted>%s</muted>', '📝', 'Notes:'));
@@ -79,7 +74,7 @@ final class ModernStyle extends SymfonyStyle
 
     private function line(string $style, string $message, string $emoji): void
     {
-        $this->writeln(sprintf('<%s>%s</%s> %s', $style, $emoji, $style, OutputFormatter::escape($message)));
+        $this->writeln(sprintf(' %s <%s>%s</%s>', $emoji, $style, OutputFormatter::escape($message), $style));
     }
 
     public static function applyTheme(OutputInterface $output): void
