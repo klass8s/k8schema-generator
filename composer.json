@@ -67,5 +67,8 @@
             "allow-contrib": true,
             "require": "8.0.*"
         }
-    }
+    },
+    "bin": [
+        "bin/k8schema-generator"
+    ]
 }
