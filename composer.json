@@ -1,7 +1,7 @@
 {
     "name": "tequila/k8schema-generator",
     "description": "Generates PHP classes from Kubernetes API schema definitions",
-    "type": "library",
+    "type": "application",
     "license": "proprietary",
     "minimum-stability": "dev",
     "prefer-stable": true,
