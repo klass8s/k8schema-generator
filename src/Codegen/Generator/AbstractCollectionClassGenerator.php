@@ -195,8 +195,6 @@ abstract class AbstractCollectionClassGenerator
             ->addProperty(self::PROPERTY_NAME)
             ->setPrivate()
             ->setType(static::propertyType())
-            ->setValue([])
-            ->setInitialized()
             ->setNullable(false)
             ->addComment(PHP_EOL)
             ->addComment(

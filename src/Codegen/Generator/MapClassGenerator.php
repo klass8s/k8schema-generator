@@ -54,7 +54,7 @@ final class MapClassGenerator extends AbstractCollectionClassGenerator
 
     protected function clearMethodBody(): string
     {
-        return sprintf('$this->%s = new \ArrayObject();', self::PROPERTY_NAME);
+        return sprintf('$this->%s = new ArrayObject();', self::PROPERTY_NAME);
     }
 
     protected function defineOtherMethods(ClassType $classType, PHPType $itemType): static
