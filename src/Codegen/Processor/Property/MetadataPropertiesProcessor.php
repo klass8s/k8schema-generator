@@ -11,7 +11,7 @@ use Tequila\K8S\SchemaGenerator\JsonSchema\DataType\PropertyDefinition;
 
 class MetadataPropertiesProcessor extends AbstractPropertyDefinitionProcessor
 {
-    private const DESCRIPTION_PATTERN_TO_MATCH = '/populated\s+by\s+(the\s+)?system/i';
+    private const string DESCRIPTION_PATTERN_TO_MATCH = '/populated\s+by\s+(the\s+)?system/i';
 
     public function process(PropertyDefinition $property, ClassName $className, ClassType $class, Context $context): void
     {

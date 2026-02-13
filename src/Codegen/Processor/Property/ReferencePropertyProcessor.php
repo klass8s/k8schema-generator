@@ -42,6 +42,10 @@ final class ReferencePropertyProcessor extends AbstractPropertyProcessor
             return;
         }
 
+        if (!$definition->required()) {
+            return;
+        }
+
         $definition->setNullable(false);
         $property
             ->setNullable(false)

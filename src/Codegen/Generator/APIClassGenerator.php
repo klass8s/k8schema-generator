@@ -26,17 +26,21 @@ class APIClassGenerator extends AbstractGenerator
             $className,
             $definition->description(),
             $definition->properties(),
-            $context
+            $context,
         );
     }
 
     protected function getInterfaceName(PHPClass $phpClass, Context $context): ClassName
     {
-        if (!$phpClass->classType()->hasMethod('metadata')) {
-            throw new \LogicException(sprintf('Method metadata() not found in class "%s"', $phpClass->name()->fqcn()));
+        if ($phpClass->classType()->hasMethod('metadata')) {
+            $method = $phpClass->classType()->getMethod('metadata');
+        } elseif (!$phpClass->classType()->hasMethod('getMetadata')) {
+            throw new \LogicException(sprintf('Neither method `metadata()`, not method `getMetadata()` was found in class "%s".', $phpClass->name()->fqcn()));
+        } else {
+            $method = $phpClass->classType()->getMethod('getMetadata');
         }
 
-        $returnType = $phpClass->classType()->getMethod('metadata')->getReturnType();
+        $returnType = $method->getReturnType();
         $metaClassName = ClassName::fromFQCN($returnType)->shortName();
 
         if ('ObjectMeta' === $metaClassName) {
@@ -45,7 +49,7 @@ class APIClassGenerator extends AbstractGenerator
             return $context->resourceListInterface;
         }
 
-        throw new \LogicException(sprintf('Unknown return type "%s" for %s::metadata() method', $returnType, $phpClass->name()->fqcn()));
+        throw new \LogicException(sprintf('Unknown return type "%s" for %s::%s() method.', $returnType, $phpClass->name()->fqcn(), $method->getName()));
     }
 
     protected function createGenerationEvent(): ClassGenerationEventInterface
