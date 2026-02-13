@@ -56,7 +56,6 @@ final readonly class LazyObjectPropertyGetterSubscriber implements EventSubscrib
                 ->setReturnNullable(false)
                 ->setReturnType($propertyType);
             if ($property->isNullable()) {
-                echo $propertyName, PHP_EOL;
                 $lazyGetter->setBody(
                     sprintf('return $this->%s ??= new %s();', $propertyName, $propertyType)
                 );
