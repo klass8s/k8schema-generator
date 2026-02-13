@@ -203,7 +203,7 @@ abstract class AbstractGenerator
             ->setNullable($definition->nullable());
 
         if ($property->isNullable()) {
-            $property->setInitialized(true);
+            $property->setInitialized();
             $property->setValue(null);
         }
 
@@ -267,8 +267,8 @@ abstract class AbstractGenerator
         $method = $class
             ->addMethod('jsonSerialize')
             ->setReturnNullable(false)
-            ->setReturnType('array');
-        $method->addBody('return [');
+            ->setReturnType('\ArrayObject');
+        $method->addBody('return new ArrayObject([');
 
         $indent = str_repeat(' ', 4);
 
@@ -286,7 +286,7 @@ abstract class AbstractGenerator
             );
         }
 
-        $method->addBody('];');
+        $method->addBody(']);');
     }
 
     protected function addImplement(ClassName $className, ClassType $class): void

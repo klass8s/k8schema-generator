@@ -68,7 +68,7 @@ abstract class AbstractGenerator implements VOClassGeneratorInterface
 
     protected function defineJsonSerializeMethod(PHPClass $class): self
     {
-        $method = $class->classType()->addMethod('jsonSerialize');
+        $method = $class->classType()->addMethod('jsonSerialize')->setReturnType('mixed');
         $method->addBody(
             $this->jsonSerializeBody()
         );

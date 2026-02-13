@@ -28,7 +28,7 @@ final class ListClassGenerator extends AbstractCollectionClassGenerator
                 sprintf(
                     '$this->%s[] = $%s;',
                     self::PROPERTY_NAME,
-                    $valueParam->getName()
+                    $valueParam->getName(),
                 )
             )
             ->addBody('')
@@ -37,20 +37,38 @@ final class ListClassGenerator extends AbstractCollectionClassGenerator
         return $this;
     }
 
-    protected function defineAddAllMethodBody(ClassType $class, PHPType $itemType, Parameter $param): string
+    protected function addAllMethodBody(ClassType $class, PHPType $itemType, Parameter $param): string
     {
         return sprintf(
             <<<'BODY'
-                foreach ($%s as $value) {
-                    $this->add($value);
-                }
+                    foreach ($%s as $value) {
+                        $this->add($value);
+                    }
                 BODY,
-            $param->getName()
+            $param->getName(),
         );
+    }
+
+    protected function clearMethodBody(): string
+    {
+        return sprintf('$this->%s = [];', self::PROPERTY_NAME);
     }
 
     protected static function classNameSuffix(): string
     {
         return self::CLASS_NAME_SUFFIX;
+    }
+
+    protected static function propertyDocType(PHPType $itemType): string
+    {
+        $types = \explode('|', $itemType->name);
+        $types = array_map(static fn (string $type) => $type.'[]', $types);
+
+        return implode('|', $types);
+    }
+
+    protected static function propertyType(): string
+    {
+        return 'array';
     }
 }

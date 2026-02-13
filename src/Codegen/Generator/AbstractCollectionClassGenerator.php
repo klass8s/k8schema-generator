@@ -21,9 +21,12 @@ abstract class AbstractCollectionClassGenerator
 
     private GeneratedClassesCache $cache;
 
-    abstract protected static function classNameSuffix(): string;
-    abstract protected function defineAddAllMethodBody(ClassType $class, PHPType $itemType, Parameter $param): string;
+    abstract protected function addAllMethodBody(ClassType $class, PHPType $itemType, Parameter $param): string;
+    abstract protected function clearMethodBody(): string;
     abstract protected function defineAddMethod(ClassType $class, PHPType $itemType): static;
+    abstract protected static function classNameSuffix(): string;
+    abstract protected static function propertyDocType(PHPType $itemType): string;
+    abstract protected static function propertyType(): string;
 
     public function __construct(GeneratedClassesCache $cache)
     {
@@ -94,38 +97,7 @@ abstract class AbstractCollectionClassGenerator
         return ClassName::fromNamespaceAndName($namespaceName, $shortClassName);
     }
 
-    protected function defineOtherMethods(ClassType $classType, PHPType $itemType): static
-    {
-        return $this;
-    }
-
-    protected static function propertyDocType(PHPType $itemType): string
-    {
-        $types = \explode('|', $itemType->name);
-        $types = array_map(fn (string $type) => $type.'[]', $types);
-
-        return implode('|', $types);
-    }
-
-    private function defineProperty(ClassType $class, PHPType $itemType): static
-    {
-        $class
-            ->addProperty(self::PROPERTY_NAME)
-            ->setPrivate()
-            ->setType('array')
-            ->setValue([])
-            ->setInitialized()
-            ->setNullable(false)
-            ->addComment(PHP_EOL)
-            ->addComment(
-                sprintf('@var %s', $this->propertyDocType($itemType))
-            )
-            ->addComment(PHP_EOL);
-
-        return $this;
-    }
-
-    private function defineAddAllMethod(ClassType $class, PHPType $itemType): static
+    protected function defineAddAllMethod(ClassType $class, PHPType $itemType): static
     {
         $method = $class
             ->addMethod('addAll')
@@ -137,30 +109,19 @@ abstract class AbstractCollectionClassGenerator
             ->setType('array')
             ->setNullable(false);
 
-        $paramDocType = $this->propertyDocType($itemType);
         $method
-            ->addComment(PHP_EOL)
-            ->addComment('@var '.$paramDocType.' $'.$param->getName())
-            ->addComment('')
-            ->addComment('@return self')
-            ->addComment(PHP_EOL);
-
-        $method
-            ->addBody(
-                $this->defineAddAllMethodBody($class, $itemType, $param)
-            )
+            ->addBody($this->addAllMethodBody($class, $itemType, $param))
             ->addBody('')
             ->addBody('return $this;');
 
         return $this;
     }
 
-
-    private function defineAllMethod(ClassType $class, PHPType $itemType): static
+    protected function defineAllMethod(ClassType $class, PHPType $itemType): static
     {
         $method = $class
             ->addMethod('all')
-            ->setReturnType('array')
+            ->setReturnType(static::propertyType())
             ->setReturnNullable(false);
 
         $method
@@ -168,14 +129,12 @@ abstract class AbstractCollectionClassGenerator
             ->addComment('@return '.$this->propertyDocType($itemType))
             ->addComment(PHP_EOL);
 
-        $method->addBody(
-            \sprintf('return $this->%s;', self::PROPERTY_NAME)
-        );
+        $method->addBody(sprintf('return $this->%s;', self::PROPERTY_NAME));
 
         return $this;
     }
 
-    private function defineClearMethod(ClassType $class): static
+    protected function defineClearMethod(ClassType $class): static
     {
         $method = $class
             ->addMethod('clear')
@@ -183,29 +142,31 @@ abstract class AbstractCollectionClassGenerator
             ->setReturnNullable(false);
 
         $method
-            ->addBody(
-                \sprintf('$this->%s = [];', self::PROPERTY_NAME)
-            )
+            ->addBody($this->clearMethodBody())
             ->addBody('')
             ->addBody('return $this;');
 
         return $this;
     }
 
-    private function defineCountMethod(ClassType $class): static
+    protected function defineOtherMethods(ClassType $classType, PHPType $itemType): static
+    {
+        return $this;
+    }
+
+    final protected function defineCountMethod(ClassType $class): static
     {
         $class
             ->addMethod('count')
             ->setReturnType(PHPType::INT)
             ->setReturnNullable(false)
-            ->addBody(
-                \sprintf('return count($this->%s);', self::PROPERTY_NAME)
-            );
+            ->addBody(sprintf('return count($this->%s);', self::PROPERTY_NAME))
+        ;
 
         return $this;
     }
 
-    private function defineConstructor(ClassType $class): static
+    final protected function defineConstructor(ClassType $class): static
     {
         $class
             ->addMethod('__construct')
@@ -214,18 +175,34 @@ abstract class AbstractCollectionClassGenerator
         return $this;
     }
 
-    private function defineJsonSerializeMethod(ClassType $class): static
+    protected function defineJsonSerializeMethod(ClassType $class): static
     {
         $class
             ->addMethod('jsonSerialize')
             ->setReturnNullable(false)
-            ->setReturnType('array')
-            ->addBody(
-                \sprintf('return $this->%s;', self::PROPERTY_NAME)
-            )
+            ->setReturnType(static::propertyType())
+            ->addBody(sprintf('return $this->%s;', self::PROPERTY_NAME))
         ;
 
         $class->addImplement(\JsonSerializable::class);
+
+        return $this;
+    }
+
+    protected function defineProperty(ClassType $class, PHPType $itemType): static
+    {
+        $class
+            ->addProperty(self::PROPERTY_NAME)
+            ->setPrivate()
+            ->setType(static::propertyType())
+            ->setValue([])
+            ->setInitialized()
+            ->setNullable(false)
+            ->addComment(PHP_EOL)
+            ->addComment(
+                sprintf('@var %s', static::propertyDocType($itemType))
+            )
+            ->addComment(PHP_EOL);
 
         return $this;
     }

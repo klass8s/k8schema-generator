@@ -10,7 +10,7 @@ use Tequila\K8S\SchemaGenerator\App\Event\CodeGeneration\APIClassGeneratedEvent;
 use Tequila\K8S\SchemaGenerator\App\Event\CodeGeneration\DataClassGeneratedEvent;
 use Tequila\K8S\SchemaGenerator\Codegen\GeneratedClassesCache;
 
-final readonly class RemoveObjectSettersSubscriber implements EventSubscriberInterface
+final readonly class LazyObjectPropertyGetterSubscriber implements EventSubscriberInterface
 {
     public function __construct(private GeneratedClassesCache $cache)
     {
@@ -26,9 +26,9 @@ final readonly class RemoveObjectSettersSubscriber implements EventSubscriberInt
             if (null === $propertyType || !$this->cache->has($propertyType)) {
                 continue; // Not a class name
             }
-            $phpClass = $this->cache->get($propertyType);
-            if (!$phpClass->isExternal) {
-                $propertyClass = $phpClass->classType();
+            $propertyPhpClass = $this->cache->get($propertyType);
+            if (!$propertyPhpClass->isExternal) {
+                $propertyClass = $propertyPhpClass->classType();
                 if (!$propertyClass->hasMethod('__construct')) {
                     continue;
                 }
@@ -43,13 +43,26 @@ final readonly class RemoveObjectSettersSubscriber implements EventSubscriberInt
             $getterName = 'get'.ucfirst($propertyName);
 
             $classType->removeMethod($setterName);
-            $getter = $classType->getMethod($getterName);
-            $newGetterName = lcfirst(substr($getterName, 3));
-            $newGetter = $getter->cloneWithName($newGetterName);
-            $methods = $classType->getMethods();
-            $methods[] = $newGetter;
-            $classType->setMethods(array_values($methods));
-            $classType->removeMethod($getterName);
+            if ($classType->hasMethod($getterName)) {
+                $classType->removeMethod($getterName);
+            }
+
+            $lazyGetterName = $propertyName;
+            if ($classType->hasMethod($lazyGetterName)) {
+                continue;
+            }
+            $lazyGetter = $classType->addMethod($lazyGetterName);
+            $lazyGetter
+                ->setReturnNullable(false)
+                ->setReturnType($propertyType);
+            if ($property->isNullable()) {
+                echo $propertyName, PHP_EOL;
+                $lazyGetter->setBody(
+                    sprintf('return $this->%s ??= new %s();', $propertyName, $propertyType)
+                );
+            } else {
+                $lazyGetter->setBody(sprintf('return $this->%s;', $propertyName));
+            }
         }
     }
 

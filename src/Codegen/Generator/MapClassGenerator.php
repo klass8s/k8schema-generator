@@ -31,7 +31,7 @@ final class MapClassGenerator extends AbstractCollectionClassGenerator
                     '$this->%s[$%s] = $%s;',
                     self::PROPERTY_NAME,
                     $nameParam->getName(),
-                    $valueParam->getName()
+                    $valueParam->getName(),
                 )
             )
             ->addBody('')
@@ -40,16 +40,21 @@ final class MapClassGenerator extends AbstractCollectionClassGenerator
         return $this;
     }
 
-    protected function defineAddAllMethodBody(ClassType $class, PHPType $itemType, Parameter $param): string
+    protected function addAllMethodBody(ClassType $class, PHPType $itemType, Parameter $param): string
     {
         return sprintf(
             <<<'BODY'
-                foreach ($%s as $key => $value) {
-                    $this->add($key, $value);
-                }
+                    foreach ($%s as $key => $value) {
+                        $this->add($key, $value);
+                    }
                 BODY,
-            $param->getName()
+            $param->getName(),
         );
+    }
+
+    protected function clearMethodBody(): string
+    {
+        return sprintf('$this->%s = new \ArrayObject();', self::PROPERTY_NAME);
     }
 
     protected function defineOtherMethods(ClassType $classType, PHPType $itemType): static
@@ -72,9 +77,9 @@ final class MapClassGenerator extends AbstractCollectionClassGenerator
         $param = $this->defineNameParam($method);
         $method->addBody(
             sprintf(
-                'return array_key_exists($%s, $this->%s);',
+                'return $this->%s->offsetExists($%s);',
+                self::PROPERTY_NAME,
                 $param->getName(),
-                self::PROPERTY_NAME
             )
         );
 
@@ -94,7 +99,7 @@ final class MapClassGenerator extends AbstractCollectionClassGenerator
             sprintf(
                 'return $this->%s[$%s];',
                 self::PROPERTY_NAME,
-                $param->getName()
+                $param->getName(),
             )
         );
 
@@ -111,7 +116,7 @@ final class MapClassGenerator extends AbstractCollectionClassGenerator
         $param = $this->defineNameParam($method);
         $method
             ->addBody(
-                sprintf('unset($this->%s[$%s]);', self::PROPERTY_NAME, $param->getName())
+                sprintf('$this->%s->offsetUnset($%s);', self::PROPERTY_NAME, $param->getName())
             )
             ->addBody('')
             ->addBody('return $this;');
@@ -129,5 +134,18 @@ final class MapClassGenerator extends AbstractCollectionClassGenerator
     protected static function classNameSuffix(): string
     {
         return self::CLASS_NAME_SUFFIX;
+    }
+
+    protected static function propertyDocType(PHPType $itemType): string
+    {
+        $types = \explode('|', $itemType->name);
+        $types = array_map(static fn (string $type) => sprintf('\ArrayObject<string, %s>', $type), $types);
+
+        return implode('|', $types);
+    }
+
+    protected static function propertyType(): string
+    {
+        return '\ArrayObject';
     }
 }
