@@ -48,15 +48,6 @@
         "symfony/polyfill-php82": "*"
     },
     "scripts": {
-        "auto-scripts": {
-            "cache:clear": "rm -rf var/cache/*"
-        },
-        "post-install-cmd": [
-            "@auto-scripts"
-        ],
-        "post-update-cmd": [
-            "@auto-scripts"
-        ],
         "cs": "./tools/php-cs-fixer/vendor/bin/php-cs-fixer fix",
         "cs:check": "./tools/php-cs-fixer/vendor/bin/php-cs-fixer check"
     },
