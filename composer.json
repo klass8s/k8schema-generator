@@ -58,7 +58,7 @@
             "@auto-scripts"
         ],
         "cs": "./tools/php-cs-fixer/vendor/bin/php-cs-fixer fix",
-        "cs-check": "./tools/php-cs-fixer/vendor/bin/php-cs-fixer check"
+        "cs:check": "./tools/php-cs-fixer/vendor/bin/php-cs-fixer check"
     },
     "conflict": {
         "symfony/symfony": "*"

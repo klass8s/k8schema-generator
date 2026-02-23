@@ -57,6 +57,11 @@ final class MapClassGenerator extends AbstractCollectionClassGenerator
         return sprintf('$this->%s = new ArrayObject();', self::PROPERTY_NAME);
     }
 
+    protected function jsonSerializeMethodBody(): string
+    {
+        return sprintf('return $this->%s->count() > 0 ? $this->%s : null;', self::PROPERTY_NAME, self::PROPERTY_NAME);
+    }
+
     protected function defineOtherMethods(ClassType $classType, PHPType $itemType): static
     {
         $this

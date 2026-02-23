@@ -10,7 +10,7 @@ use Tequila\K8S\SchemaGenerator\App\Event\CodeGeneration\APIClassGeneratedEvent;
 use Tequila\K8S\SchemaGenerator\App\Event\CodeGeneration\DataClassGeneratedEvent;
 use Tequila\K8S\SchemaGenerator\Codegen\GeneratedClassesCache;
 
-final readonly class LazyObjectPropertyGetterSubscriber implements EventSubscriberInterface
+final readonly class ObjectPropertyFluentGetterSubscriber implements EventSubscriberInterface
 {
     public function __construct(private GeneratedClassesCache $cache)
     {
@@ -42,25 +42,24 @@ final readonly class LazyObjectPropertyGetterSubscriber implements EventSubscrib
             $setterName = 'set'.ucfirst($propertyName);
             $getterName = 'get'.ucfirst($propertyName);
 
-            $classType->removeMethod($setterName);
-            if ($classType->hasMethod($getterName)) {
-                $classType->removeMethod($getterName);
-            }
-
-            $lazyGetterName = $propertyName;
-            if ($classType->hasMethod($lazyGetterName)) {
+            $fluentGetterName = $propertyName;
+            if ($classType->hasMethod($fluentGetterName)) {
                 continue;
             }
-            $lazyGetter = $classType->addMethod($lazyGetterName);
-            $lazyGetter
+
+            $fluentGetter = $classType->addMethod($fluentGetterName);
+            $fluentGetter
                 ->setReturnNullable(false)
-                ->setReturnType($propertyType);
+                ->setReturnType($propertyType)
+            ;
+
             if ($property->isNullable()) {
-                $lazyGetter->setBody(
+                $fluentGetter->setBody(
                     sprintf('return $this->%s ??= new %s();', $propertyName, $propertyType)
                 );
             } else {
-                $lazyGetter->setBody(sprintf('return $this->%s;', $propertyName));
+                $fluentGetter->setBody(sprintf('return $this->%s;', $propertyName));
+                $classType->removeMethod($getterName);
             }
         }
     }

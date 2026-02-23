@@ -23,6 +23,7 @@ abstract class AbstractCollectionClassGenerator
 
     abstract protected function addAllMethodBody(ClassType $class, PHPType $itemType, Parameter $param): string;
     abstract protected function clearMethodBody(): string;
+    abstract protected function jsonSerializeMethodBody(): string;
     abstract protected function defineAddMethod(ClassType $class, PHPType $itemType): static;
     abstract protected static function classNameSuffix(): string;
     abstract protected static function propertyDocType(PHPType $itemType): string;
@@ -177,11 +178,13 @@ abstract class AbstractCollectionClassGenerator
 
     protected function defineJsonSerializeMethod(ClassType $class): static
     {
+        $nonNullableReturnType = ltrim(static::propertyType(), '?')
+                |> (static fn (string $type): string => str_replace(['|null', 'null|'], ['', ''], $type));
         $class
             ->addMethod('jsonSerialize')
             ->setReturnNullable(false)
-            ->setReturnType(static::propertyType())
-            ->addBody(sprintf('return $this->%s;', self::PROPERTY_NAME))
+            ->setReturnType('?'.$nonNullableReturnType)
+            ->addBody($this->jsonSerializeMethodBody())
         ;
 
         $class->addImplement(\JsonSerializable::class);

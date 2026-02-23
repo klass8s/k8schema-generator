@@ -13,3 +13,4 @@
 /tools/*/vendor/
 /tools/*/composer.lock
 /.php-cs-fixer.cache
+/.claude/settings.local.json

@@ -54,6 +54,11 @@ final class ListClassGenerator extends AbstractCollectionClassGenerator
         return sprintf('$this->%s = [];', self::PROPERTY_NAME);
     }
 
+    protected function jsonSerializeMethodBody(): string
+    {
+        return sprintf('return count($this->%s) > 0 ? $this->%s : null;', self::PROPERTY_NAME, self::PROPERTY_NAME);
+    }
+
     protected static function classNameSuffix(): string
     {
         return self::CLASS_NAME_SUFFIX;
