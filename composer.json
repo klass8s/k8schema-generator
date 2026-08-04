@@ -19,7 +19,7 @@
         "symfony/flex": "^2.10",
         "symfony/framework-bundle": ">=8.0",
         "symfony/http-client": ">=8.0",
-        "symfony/runtime": "8.0.*",
+        "symfony/runtime": "8.1.*",
         "symfony/string": ">=8.0",
         "symfony/yaml": ">=8.0"
     },
@@ -57,7 +57,7 @@
     "extra": {
         "symfony": {
             "allow-contrib": true,
-            "require": "8.0.*"
+            "require": "8.1.*"
         }
     },
     "bin": [
