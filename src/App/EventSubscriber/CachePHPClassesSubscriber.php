@@ -8,6 +8,7 @@ use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Tequila\K8S\SchemaGenerator\App\Event\CodeGeneration\APIClassGeneratedEvent;
 use Tequila\K8S\SchemaGenerator\App\Event\CodeGeneration\APIClassGenerationEvent;
 use Tequila\K8S\SchemaGenerator\App\Event\CodeGeneration\ClassGenerationEventInterface;
+use Tequila\K8S\SchemaGenerator\App\Event\CodeGeneration\ClassInProgressEvent;
 use Tequila\K8S\SchemaGenerator\App\Event\CodeGeneration\DataClassGeneratedEvent;
 use Tequila\K8S\SchemaGenerator\App\Event\CodeGeneration\DataClassGenerationEvent;
 use Tequila\K8S\SchemaGenerator\App\Event\CodeGeneration\PHPClassEventInterface;
@@ -45,6 +46,7 @@ final readonly class CachePHPClassesSubscriber implements EventSubscriberInterfa
         return [
             APIClassGenerationEvent::class => 'onClassGeneration',
             DataClassGenerationEvent::class => 'onClassGeneration',
+            ClassInProgressEvent::class => 'onClassGenerated',
             APIClassGeneratedEvent::class => 'onClassGenerated',
             DataClassGeneratedEvent::class => 'onClassGenerated',
         ];

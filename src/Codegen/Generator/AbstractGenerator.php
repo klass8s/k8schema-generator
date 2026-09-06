@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Tequila\K8S\SchemaGenerator\Codegen\Generator;
 
 use Tequila\K8S\SchemaGenerator\App\Event\CodeGeneration\ClassGenerationEventInterface;
+use Tequila\K8S\SchemaGenerator\App\Event\CodeGeneration\ClassInProgressEvent;
 use Tequila\K8S\SchemaGenerator\App\Event\CodeGeneration\ClassNameEvent;
 use Tequila\K8S\SchemaGenerator\App\Event\CodeGeneration\JsonSerializeMethodEvent;
 use Tequila\K8S\SchemaGenerator\App\Event\CodeGeneration\PHPClassEventInterface;
@@ -49,10 +50,15 @@ abstract class AbstractGenerator
 
         $class = new ClassType($className->shortName());
         $class->addComment(wordwrap($description, 80));
+
+        // Known by name from here on: a property whose type refers back to this very
+        // definition resolves to the class in progress instead of generating it again.
+        $phpClass = new PHPClass($className, $class);
+        $this->dispatcher->dispatch(new ClassInProgressEvent($phpClass));
+
         $this->defineClassMembers($className, $class, $properties, $context);
         $this->defineJsonSerializeMethod($className, $class);
 
-        $phpClass = new PHPClass($className, $class);
         foreach ($this->classesToUse as $classNameToUse) {
             $phpClass->useClass($classNameToUse);
         }
