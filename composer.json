@@ -1,8 +1,13 @@
 {
-    "name": "tequila/k8schema-generator",
+    "name": "klass8s/k8schema-generator",
     "description": "Generates PHP classes from Kubernetes API schema definitions",
     "type": "application",
-    "license": "proprietary",
+    "license": "MIT",
+    "support": {
+        "issues": "https://github.com/klass8s/k8schema-generator/issues",
+        "source": "https://github.com/klass8s/k8schema-generator",
+        "security": "https://github.com/klass8s/k8schema-generator/security/policy"
+    },
     "minimum-stability": "dev",
     "prefer-stable": true,
     "require": {
@@ -38,6 +43,7 @@
         }
     },
     "replace": {
+        "tequila/k8schema-generator": "self.version",
         "symfony/polyfill-ctype": "*",
         "symfony/polyfill-iconv": "*",
         "symfony/polyfill-php72": "*",

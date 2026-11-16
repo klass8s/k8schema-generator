@@ -1,10 +1,10 @@
 # Third-party notices
 
-`tequila/k8schema-generator` continues an open-source project published under the MIT License:
+`klass8s/k8schema-generator` continues an open-source project published under the MIT License:
 
 - `dealroadshow/kodegen` — https://github.com/petr-buchin/kodegen
 
-`tequila/k8schema-generator` renamed it and extended it. The portions that come from that project
+`klass8s/k8schema-generator` renamed it and extended it. The portions that come from that project
 remain under the MIT License. Its notice follows exactly as the project publishes it.
 
 ---
