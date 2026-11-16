@@ -1,0 +1,81 @@
+# The generator's checks: code style, and a generation of one Kubernetes minor whose every
+# class must compile. Every job runs on a GitHub-hosted runner with a read-only GITHUB_TOKEN and
+# names no stored secret, so a pull request from a fork runs exactly what a branch runs.
+name: CI
+
+on:
+    push:
+        branches: [main]
+    pull_request:
+        branches: [main]
+
+permissions: {}
+
+concurrency:
+    group: ci-${{ github.event.pull_request.number || github.ref }}
+    cancel-in-progress: true
+
+jobs:
+    checks:
+        name: Code style
+        runs-on: ubuntu-latest
+        timeout-minutes: 15
+        permissions:
+            contents: read
+        steps:
+            - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+              with:
+                  persist-credentials: false
+            - uses: shivammathur/setup-php@eb7c497e18156a6bbabfef1d3a82760b9eda3962 # 2.40.0
+              with:
+                  php-version: '8.5'
+                  tools: composer
+                  coverage: none
+            - uses: actions/cache@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
+              with:
+                  path: ~/.cache/composer/files
+                  key: composer-${{ runner.os }}-${{ hashFiles('composer.lock', 'tools/*/composer.lock') }}
+                  restore-keys: composer-${{ runner.os }}-
+            - run: composer install --no-interaction --no-progress
+            - run: composer install -d tools/php-cs-fixer --no-interaction --no-progress
+            - run: composer cs:check
+
+    generate:
+        name: Generate Kubernetes ${{ matrix.minor }}
+        runs-on: ubuntu-latest
+        timeout-minutes: 15
+        permissions:
+            contents: read
+        strategy:
+            fail-fast: false
+            matrix:
+                minor: [v1.35]
+        steps:
+            - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+              with:
+                  persist-credentials: false
+            - uses: shivammathur/setup-php@eb7c497e18156a6bbabfef1d3a82760b9eda3962 # 2.40.0
+              with:
+                  php-version: '8.5'
+                  tools: composer
+                  coverage: none
+            - uses: actions/cache@55cc8345863c7cc4c66a329aec7e433d2d1c52a9 # v6.1.0
+              with:
+                  path: ~/.cache/composer/files
+                  key: composer-${{ runner.os }}-${{ hashFiles('composer.lock') }}
+                  restore-keys: composer-${{ runner.os }}-
+            - run: composer install --no-interaction --no-progress
+            - name: Fetch the schema and generate the classes
+              env:
+                  MINOR: ${{ matrix.minor }}
+              run: |
+                  set -euo pipefail
+                  bin/k8schema-generator schema:fetch "$MINOR" "var/$MINOR.json"
+                  bin/k8schema-generator generate "var/$MINOR.json" --namespace-prefix=K8Schema --output-dir=var/out/src
+            - name: Every generated class compiles
+              run: |
+                  set -euo pipefail
+                  count=$(find var/out/src -name '*.php' | wc -l)
+                  echo "generated $count classes"
+                  [ "$count" -gt 500 ] || { echo "::error::only $count classes generated"; exit 1; }
+                  find var/out/src -name '*.php' -print0 | xargs -0 -n 100 -P 4 php -l > /dev/null
