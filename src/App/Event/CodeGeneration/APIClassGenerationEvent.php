@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace Tequila\K8S\SchemaGenerator\App\Event\CodeGeneration;
+namespace Klass8s\K8SchemaGenerator\App\Event\CodeGeneration;
 
-use Tequila\K8S\SchemaGenerator\Codegen\Context;
-use Tequila\K8S\SchemaGenerator\Codegen\Definition\ApiObjectDefinition;
-use Tequila\K8S\SchemaGenerator\Codegen\Type\ClassName;
+use Klass8s\K8SchemaGenerator\Codegen\Context;
+use Klass8s\K8SchemaGenerator\Codegen\Definition\ApiObjectDefinition;
+use Klass8s\K8SchemaGenerator\Codegen\Type\ClassName;
 
 class APIClassGenerationEvent extends AbstractClassGenerationEvent
 {

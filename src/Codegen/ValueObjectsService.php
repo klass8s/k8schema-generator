@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace Tequila\K8S\SchemaGenerator\Codegen;
+namespace Klass8s\K8SchemaGenerator\Codegen;
 
-use Tequila\K8S\SchemaGenerator\Codegen\Type\ClassName;
-use Tequila\K8S\SchemaGenerator\Codegen\Type\PHPClass;
-use Tequila\K8S\SchemaGenerator\Codegen\ValueObject\VOClassGeneratorInterface;
-use Tequila\K8S\SchemaGenerator\JsonSchema\DataType\DataTypeInterface;
+use Klass8s\K8SchemaGenerator\Codegen\Type\ClassName;
+use Klass8s\K8SchemaGenerator\Codegen\Type\PHPClass;
+use Klass8s\K8SchemaGenerator\Codegen\ValueObject\VOClassGeneratorInterface;
+use Klass8s\K8SchemaGenerator\JsonSchema\DataType\DataTypeInterface;
 
 final readonly class ValueObjectsService
 {

@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Tequila\K8S\SchemaGenerator\Codegen;
+namespace Klass8s\K8SchemaGenerator\Codegen;
 
-use Tequila\K8S\SchemaGenerator\Codegen\Type\PHPClass;
+use Klass8s\K8SchemaGenerator\Codegen\Type\PHPClass;
 
 final readonly class GeneratedClassesCache implements \IteratorAggregate
 {

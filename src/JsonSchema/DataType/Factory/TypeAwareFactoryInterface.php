@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Tequila\K8S\SchemaGenerator\JsonSchema\DataType\Factory;
+namespace Klass8s\K8SchemaGenerator\JsonSchema\DataType\Factory;
 
 interface TypeAwareFactoryInterface extends DataTypeFactoryInterface
 {

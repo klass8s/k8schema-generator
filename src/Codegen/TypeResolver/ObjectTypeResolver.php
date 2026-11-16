@@ -2,16 +2,16 @@
 
 declare(strict_types=1);
 
-namespace Tequila\K8S\SchemaGenerator\Codegen\TypeResolver;
+namespace Klass8s\K8SchemaGenerator\Codegen\TypeResolver;
 
-use Tequila\K8S\SchemaGenerator\Codegen\Context;
-use Tequila\K8S\SchemaGenerator\Codegen\Generator\DataClassGenerator;
-use Tequila\K8S\SchemaGenerator\Codegen\PHPTypesService;
-use Tequila\K8S\SchemaGenerator\Codegen\Type\ClassName;
-use Tequila\K8S\SchemaGenerator\Codegen\Type\PHPType;
-use Tequila\K8S\SchemaGenerator\JsonSchema\DataType\DataTypeInterface;
-use Tequila\K8S\SchemaGenerator\JsonSchema\DataType\ObjectType;
-use Tequila\K8S\SchemaGenerator\JsonSchema\DataType\PropertyDefinition;
+use Klass8s\K8SchemaGenerator\Codegen\Context;
+use Klass8s\K8SchemaGenerator\Codegen\Generator\DataClassGenerator;
+use Klass8s\K8SchemaGenerator\Codegen\PHPTypesService;
+use Klass8s\K8SchemaGenerator\Codegen\Type\ClassName;
+use Klass8s\K8SchemaGenerator\Codegen\Type\PHPType;
+use Klass8s\K8SchemaGenerator\JsonSchema\DataType\DataTypeInterface;
+use Klass8s\K8SchemaGenerator\JsonSchema\DataType\ObjectType;
+use Klass8s\K8SchemaGenerator\JsonSchema\DataType\PropertyDefinition;
 
 final class ObjectTypeResolver extends AbstractTypeResolver
 {

@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Tequila\K8S\SchemaGenerator\JsonSchema;
+namespace Klass8s\K8SchemaGenerator\JsonSchema;
 
-use Tequila\K8S\SchemaGenerator\JsonSchema\DataType\DataTypeInterface;
+use Klass8s\K8SchemaGenerator\JsonSchema\DataType\DataTypeInterface;
 
 class TypesMap implements \IteratorAggregate
 {

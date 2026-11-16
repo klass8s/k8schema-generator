@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
-namespace Tequila\K8S\SchemaGenerator\JsonSchema\DataType\Factory;
+namespace Klass8s\K8SchemaGenerator\JsonSchema\DataType\Factory;
 
-use Tequila\K8S\SchemaGenerator\JsonSchema\DataType\AbstractUnionType;
-use Tequila\K8S\SchemaGenerator\JsonSchema\DataType\AllOfType;
-use Tequila\K8S\SchemaGenerator\JsonSchema\DataType\AnyOfType;
-use Tequila\K8S\SchemaGenerator\JsonSchema\DataType\DataTypesService;
-use Tequila\K8S\SchemaGenerator\JsonSchema\DataType\OneOfType;
+use Klass8s\K8SchemaGenerator\JsonSchema\DataType\AbstractUnionType;
+use Klass8s\K8SchemaGenerator\JsonSchema\DataType\AllOfType;
+use Klass8s\K8SchemaGenerator\JsonSchema\DataType\AnyOfType;
+use Klass8s\K8SchemaGenerator\JsonSchema\DataType\DataTypesService;
+use Klass8s\K8SchemaGenerator\JsonSchema\DataType\OneOfType;
 
 class UnionTypesFactory implements TypeUnawareFactoryInterface
 {

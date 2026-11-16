@@ -2,17 +2,17 @@
 
 declare(strict_types=1);
 
-namespace Tequila\K8S\SchemaGenerator\App\EventSubscriber;
+namespace Klass8s\K8SchemaGenerator\App\EventSubscriber;
 
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
-use Tequila\K8S\SchemaGenerator\App\Event\CodeGeneration\APIClassGeneratedEvent;
-use Tequila\K8S\SchemaGenerator\App\Event\CodeGeneration\APIClassGenerationEvent;
-use Tequila\K8S\SchemaGenerator\App\Event\CodeGeneration\ClassGenerationEventInterface;
-use Tequila\K8S\SchemaGenerator\App\Event\CodeGeneration\ClassInProgressEvent;
-use Tequila\K8S\SchemaGenerator\App\Event\CodeGeneration\DataClassGeneratedEvent;
-use Tequila\K8S\SchemaGenerator\App\Event\CodeGeneration\DataClassGenerationEvent;
-use Tequila\K8S\SchemaGenerator\App\Event\CodeGeneration\PHPClassEventInterface;
-use Tequila\K8S\SchemaGenerator\Codegen\GeneratedClassesCache;
+use Klass8s\K8SchemaGenerator\App\Event\CodeGeneration\APIClassGeneratedEvent;
+use Klass8s\K8SchemaGenerator\App\Event\CodeGeneration\APIClassGenerationEvent;
+use Klass8s\K8SchemaGenerator\App\Event\CodeGeneration\ClassGenerationEventInterface;
+use Klass8s\K8SchemaGenerator\App\Event\CodeGeneration\ClassInProgressEvent;
+use Klass8s\K8SchemaGenerator\App\Event\CodeGeneration\DataClassGeneratedEvent;
+use Klass8s\K8SchemaGenerator\App\Event\CodeGeneration\DataClassGenerationEvent;
+use Klass8s\K8SchemaGenerator\App\Event\CodeGeneration\PHPClassEventInterface;
+use Klass8s\K8SchemaGenerator\Codegen\GeneratedClassesCache;
 
 final readonly class CachePHPClassesSubscriber implements EventSubscriberInterface
 {

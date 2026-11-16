@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace Tequila\K8S\SchemaGenerator\JsonSchema\DataType\Factory;
+namespace Klass8s\K8SchemaGenerator\JsonSchema\DataType\Factory;
 
-use Tequila\K8S\SchemaGenerator\JsonSchema\DataType\ArrayType;
-use Tequila\K8S\SchemaGenerator\JsonSchema\DataType\DataTypeInterface;
-use Tequila\K8S\SchemaGenerator\JsonSchema\DataType\DataTypesService;
+use Klass8s\K8SchemaGenerator\JsonSchema\DataType\ArrayType;
+use Klass8s\K8SchemaGenerator\JsonSchema\DataType\DataTypeInterface;
+use Klass8s\K8SchemaGenerator\JsonSchema\DataType\DataTypesService;
 
 class ArrayTypeFactory implements TypeAwareFactoryInterface
 {

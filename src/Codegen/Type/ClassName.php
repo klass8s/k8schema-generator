@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace Tequila\K8S\SchemaGenerator\Codegen\Type;
+namespace Klass8s\K8SchemaGenerator\Codegen\Type;
 
 use Symfony\Component\String\AbstractUnicodeString;
-use Tequila\K8S\SchemaGenerator\App\Util\Str;
+use Klass8s\K8SchemaGenerator\App\Util\Str;
 
 use function Symfony\Component\String\u;
 

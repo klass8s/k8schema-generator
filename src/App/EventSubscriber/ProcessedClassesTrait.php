@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Tequila\K8S\SchemaGenerator\App\EventSubscriber;
+namespace Klass8s\K8SchemaGenerator\App\EventSubscriber;
 
-use Tequila\K8S\SchemaGenerator\Codegen\Type\ClassName;
+use Klass8s\K8SchemaGenerator\Codegen\Type\ClassName;
 
 trait ProcessedClassesTrait
 {

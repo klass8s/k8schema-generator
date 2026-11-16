@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace Tequila\K8S\SchemaGenerator\App\EventSubscriber;
+namespace Klass8s\K8SchemaGenerator\App\EventSubscriber;
 
 use Nette\PhpGenerator\InterfaceType;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
-use Tequila\K8S\SchemaGenerator\App\Event\CodeGeneration\DataClassGenerationEvent;
-use Tequila\K8S\SchemaGenerator\Codegen\Type\PHPClass;
+use Klass8s\K8SchemaGenerator\App\Event\CodeGeneration\DataClassGenerationEvent;
+use Klass8s\K8SchemaGenerator\Codegen\Type\PHPClass;
 
 class ResolveJsonSchemaPropsSubscriber implements EventSubscriberInterface
 {

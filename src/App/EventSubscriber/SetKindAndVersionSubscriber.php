@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace Tequila\K8S\SchemaGenerator\App\EventSubscriber;
+namespace Klass8s\K8SchemaGenerator\App\EventSubscriber;
 
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
-use Tequila\K8S\SchemaGenerator\App\Event\CodeGeneration\APIClassGenerationEvent;
-use Tequila\K8S\SchemaGenerator\App\Event\CodeGeneration\JsonSerializeMethodEvent;
-use Tequila\K8S\SchemaGenerator\Codegen\Type\ClassName;
+use Klass8s\K8SchemaGenerator\App\Event\CodeGeneration\APIClassGenerationEvent;
+use Klass8s\K8SchemaGenerator\App\Event\CodeGeneration\JsonSerializeMethodEvent;
+use Klass8s\K8SchemaGenerator\Codegen\Type\ClassName;
 
 class SetKindAndVersionSubscriber implements EventSubscriberInterface
 {

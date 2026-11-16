@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace Tequila\K8S\SchemaGenerator\App\Console\Command;
+namespace Klass8s\K8SchemaGenerator\App\Console\Command;
 
 use Symfony\Component\Console\Attribute\AsCommand;
-use Tequila\K8S\SchemaGenerator\Codegen\K8SCodeGenerationService;
+use Klass8s\K8SchemaGenerator\Codegen\K8SCodeGenerationService;
 
 #[AsCommand(
     name: 'generate',

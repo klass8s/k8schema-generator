@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Tequila\K8S\SchemaGenerator\JsonSchema\DataType;
+namespace Klass8s\K8SchemaGenerator\JsonSchema\DataType;
 
-use Tequila\K8S\SchemaGenerator\Codegen\Type\PHPType;
+use Klass8s\K8SchemaGenerator\Codegen\Type\PHPType;
 
 class PropertyDefinition
 {

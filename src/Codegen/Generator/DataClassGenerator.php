@@ -2,16 +2,16 @@
 
 declare(strict_types=1);
 
-namespace Tequila\K8S\SchemaGenerator\Codegen\Generator;
+namespace Klass8s\K8SchemaGenerator\Codegen\Generator;
 
-use Tequila\K8S\SchemaGenerator\App\Event\CodeGeneration\ClassGenerationEventInterface;
-use Tequila\K8S\SchemaGenerator\App\Event\CodeGeneration\DataClassGeneratedEvent;
-use Tequila\K8S\SchemaGenerator\App\Event\CodeGeneration\DataClassGenerationEvent;
-use Tequila\K8S\SchemaGenerator\App\Event\CodeGeneration\PHPClassEventInterface;
-use Tequila\K8S\SchemaGenerator\Codegen\Context;
-use Tequila\K8S\SchemaGenerator\Codegen\Type\ClassName;
-use Tequila\K8S\SchemaGenerator\Codegen\Type\PHPClass;
-use Tequila\K8S\SchemaGenerator\JsonSchema\DataType\ObjectType;
+use Klass8s\K8SchemaGenerator\App\Event\CodeGeneration\ClassGenerationEventInterface;
+use Klass8s\K8SchemaGenerator\App\Event\CodeGeneration\DataClassGeneratedEvent;
+use Klass8s\K8SchemaGenerator\App\Event\CodeGeneration\DataClassGenerationEvent;
+use Klass8s\K8SchemaGenerator\App\Event\CodeGeneration\PHPClassEventInterface;
+use Klass8s\K8SchemaGenerator\Codegen\Context;
+use Klass8s\K8SchemaGenerator\Codegen\Type\ClassName;
+use Klass8s\K8SchemaGenerator\Codegen\Type\PHPClass;
+use Klass8s\K8SchemaGenerator\JsonSchema\DataType\ObjectType;
 
 final class DataClassGenerator extends AbstractGenerator
 {

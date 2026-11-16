@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace Tequila\K8S\SchemaGenerator\Codegen\Generator;
+namespace Klass8s\K8SchemaGenerator\Codegen\Generator;
 
 use Nette\PhpGenerator\InterfaceType;
-use Tequila\K8S\SchemaGenerator\Codegen\Type\ClassName;
-use Tequila\K8S\SchemaGenerator\Codegen\Type\PHPClass;
+use Klass8s\K8SchemaGenerator\Codegen\Type\ClassName;
+use Klass8s\K8SchemaGenerator\Codegen\Type\PHPClass;
 
 class BaseInterfacesGenerator
 {

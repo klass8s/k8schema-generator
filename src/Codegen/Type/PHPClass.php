@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace Tequila\K8S\SchemaGenerator\Codegen\Type;
+namespace Klass8s\K8SchemaGenerator\Codegen\Type;
 
 use Nette\PhpGenerator\InterfaceType;
-use Tequila\K8S\SchemaGenerator\Codegen\Context;
-use Tequila\K8S\SchemaGenerator\Codegen\Printer\PsrPrinter;
+use Klass8s\K8SchemaGenerator\Codegen\Context;
+use Klass8s\K8SchemaGenerator\Codegen\Printer\PsrPrinter;
 use Nette\PhpGenerator\ClassType;
 use Nette\PhpGenerator\Method;
 use Nette\PhpGenerator\Parameter;

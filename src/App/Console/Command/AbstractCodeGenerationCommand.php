@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Tequila\K8S\SchemaGenerator\App\Console\Command;
+namespace Klass8s\K8SchemaGenerator\App\Console\Command;
 
 use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
@@ -11,8 +11,8 @@ use Symfony\Component\Console\Input\InputOption;
 use Symfony\Component\Console\Output\OutputInterface;
 use Symfony\Component\Console\Question\Question;
 use Symfony\Component\Console\Style\SymfonyStyle;
-use Tequila\K8S\SchemaGenerator\App\Console\UI\ModernStyle;
-use Tequila\K8S\SchemaGenerator\Codegen\CodeGenerationServiceInterface;
+use Klass8s\K8SchemaGenerator\App\Console\UI\ModernStyle;
+use Klass8s\K8SchemaGenerator\Codegen\CodeGenerationServiceInterface;
 
 abstract class AbstractCodeGenerationCommand extends Command
 {

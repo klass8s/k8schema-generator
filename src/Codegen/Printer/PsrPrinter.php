@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Tequila\K8S\SchemaGenerator\Codegen\Printer;
+namespace Klass8s\K8SchemaGenerator\Codegen\Printer;
 
 use Nette\PhpGenerator\PhpNamespace;
 use Nette\PhpGenerator\Printer;

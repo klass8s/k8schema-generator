@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
-namespace Tequila\K8S\SchemaGenerator;
+namespace Klass8s\K8SchemaGenerator;
 
 use Symfony\Bundle\FrameworkBundle\Kernel\MicroKernelTrait;
 use Symfony\Component\DependencyInjection\Compiler\PassConfig;
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\HttpKernel\Kernel as BaseKernel;
-use Tequila\K8S\SchemaGenerator\App\DependencyInjection\Compiler\RemoveDefaultSymfonyCommandsPass;
+use Klass8s\K8SchemaGenerator\App\DependencyInjection\Compiler\RemoveDefaultSymfonyCommandsPass;
 
 class Kernel extends BaseKernel
 {

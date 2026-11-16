@@ -2,15 +2,15 @@
 
 declare(strict_types=1);
 
-namespace Tequila\K8S\SchemaGenerator\Codegen;
+namespace Klass8s\K8SchemaGenerator\Codegen;
 
-use Tequila\K8S\SchemaGenerator\App\Util\ClassUtil;
-use Tequila\K8S\SchemaGenerator\Codegen\Definition\ObjectDefinitionsService;
-use Tequila\K8S\SchemaGenerator\Codegen\Generator\APIClassGenerator;
-use Tequila\K8S\SchemaGenerator\Codegen\Generator\BaseInterfacesGenerator;
-use Tequila\K8S\SchemaGenerator\Codegen\Type\ClassName;
-use Tequila\K8S\SchemaGenerator\Codegen\Type\PHPClass;
-use Tequila\K8S\SchemaGenerator\JsonSchema\JsonSchemaService;
+use Klass8s\K8SchemaGenerator\App\Util\ClassUtil;
+use Klass8s\K8SchemaGenerator\Codegen\Definition\ObjectDefinitionsService;
+use Klass8s\K8SchemaGenerator\Codegen\Generator\APIClassGenerator;
+use Klass8s\K8SchemaGenerator\Codegen\Generator\BaseInterfacesGenerator;
+use Klass8s\K8SchemaGenerator\Codegen\Type\ClassName;
+use Klass8s\K8SchemaGenerator\Codegen\Type\PHPClass;
+use Klass8s\K8SchemaGenerator\JsonSchema\JsonSchemaService;
 
 final readonly class K8SCodeGenerationService implements CodeGenerationServiceInterface
 {

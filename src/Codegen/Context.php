@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace Tequila\K8S\SchemaGenerator\Codegen;
+namespace Klass8s\K8SchemaGenerator\Codegen;
 
-use Tequila\K8S\SchemaGenerator\Codegen\Definition\ApiObjectDefinitionsMap;
-use Tequila\K8S\SchemaGenerator\Codegen\Type\ClassName;
-use Tequila\K8S\SchemaGenerator\JsonSchema\TypesMap;
+use Klass8s\K8SchemaGenerator\Codegen\Definition\ApiObjectDefinitionsMap;
+use Klass8s\K8SchemaGenerator\Codegen\Type\ClassName;
+use Klass8s\K8SchemaGenerator\JsonSchema\TypesMap;
 
 final readonly class Context
 {

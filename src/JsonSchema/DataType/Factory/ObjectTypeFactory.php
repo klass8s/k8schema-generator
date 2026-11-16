@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace Tequila\K8S\SchemaGenerator\JsonSchema\DataType\Factory;
+namespace Klass8s\K8SchemaGenerator\JsonSchema\DataType\Factory;
 
-use Tequila\K8S\SchemaGenerator\JsonSchema\DataType\DataTypesService;
-use Tequila\K8S\SchemaGenerator\JsonSchema\DataType\ObjectType;
-use Tequila\K8S\SchemaGenerator\JsonSchema\DataType\PropertyDefinition;
-use Tequila\K8S\SchemaGenerator\JsonSchema\DataType\UnknownType;
+use Klass8s\K8SchemaGenerator\JsonSchema\DataType\DataTypesService;
+use Klass8s\K8SchemaGenerator\JsonSchema\DataType\ObjectType;
+use Klass8s\K8SchemaGenerator\JsonSchema\DataType\PropertyDefinition;
+use Klass8s\K8SchemaGenerator\JsonSchema\DataType\UnknownType;
 
 class ObjectTypeFactory implements TypeAwareFactoryInterface
 {

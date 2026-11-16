@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace Tequila\K8S\SchemaGenerator\App\EventSubscriber;
+namespace Klass8s\K8SchemaGenerator\App\EventSubscriber;
 
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
-use Tequila\K8S\SchemaGenerator\App\Event\CodeGeneration\AbstractPHPClassEvent;
-use Tequila\K8S\SchemaGenerator\App\Event\CodeGeneration\APIClassGeneratedEvent;
-use Tequila\K8S\SchemaGenerator\App\Event\CodeGeneration\DataClassGeneratedEvent;
+use Klass8s\K8SchemaGenerator\App\Event\CodeGeneration\AbstractPHPClassEvent;
+use Klass8s\K8SchemaGenerator\App\Event\CodeGeneration\APIClassGeneratedEvent;
+use Klass8s\K8SchemaGenerator\App\Event\CodeGeneration\DataClassGeneratedEvent;
 
 class ListClassesSubscriber implements EventSubscriberInterface
 {

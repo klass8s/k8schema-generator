@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Tequila\K8S\SchemaGenerator\App\SemVer;
+namespace Klass8s\K8SchemaGenerator\App\SemVer;
 
 final readonly class Version
 {

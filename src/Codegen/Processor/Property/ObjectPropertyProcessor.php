@@ -2,16 +2,16 @@
 
 declare(strict_types=1);
 
-namespace Tequila\K8S\SchemaGenerator\Codegen\Processor\Property;
+namespace Klass8s\K8SchemaGenerator\Codegen\Processor\Property;
 
-use Tequila\K8S\SchemaGenerator\Codegen\Context;
-use Tequila\K8S\SchemaGenerator\Codegen\Type\ClassName;
+use Klass8s\K8SchemaGenerator\Codegen\Context;
+use Klass8s\K8SchemaGenerator\Codegen\Type\ClassName;
 use Nette\PhpGenerator\ClassType;
 use Nette\PhpGenerator\Method;
 use Nette\PhpGenerator\Property;
-use Tequila\K8S\SchemaGenerator\JsonSchema\DataType\ArrayType;
-use Tequila\K8S\SchemaGenerator\JsonSchema\DataType\ObjectType;
-use Tequila\K8S\SchemaGenerator\JsonSchema\DataType\PropertyDefinition;
+use Klass8s\K8SchemaGenerator\JsonSchema\DataType\ArrayType;
+use Klass8s\K8SchemaGenerator\JsonSchema\DataType\ObjectType;
+use Klass8s\K8SchemaGenerator\JsonSchema\DataType\PropertyDefinition;
 
 class ObjectPropertyProcessor extends AbstractPropertyDefinitionProcessor
 {

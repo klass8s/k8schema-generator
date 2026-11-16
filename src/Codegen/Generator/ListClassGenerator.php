@@ -2,10 +2,10 @@
 
 declare(strict_types=1);
 
-namespace Tequila\K8S\SchemaGenerator\Codegen\Generator;
+namespace Klass8s\K8SchemaGenerator\Codegen\Generator;
 
 use Nette\PhpGenerator\ClassType;
-use Tequila\K8S\SchemaGenerator\Codegen\Type\PHPType;
+use Klass8s\K8SchemaGenerator\Codegen\Type\PHPType;
 use Nette\PhpGenerator\Parameter;
 
 final class ListClassGenerator extends AbstractCollectionClassGenerator

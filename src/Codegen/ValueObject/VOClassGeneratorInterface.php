@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
-namespace Tequila\K8S\SchemaGenerator\Codegen\ValueObject;
+namespace Klass8s\K8SchemaGenerator\Codegen\ValueObject;
 
-use Tequila\K8S\SchemaGenerator\Codegen\Context;
-use Tequila\K8S\SchemaGenerator\Codegen\PHPTypesService;
-use Tequila\K8S\SchemaGenerator\Codegen\Type\ClassName;
-use Tequila\K8S\SchemaGenerator\Codegen\Type\PHPClass;
-use Tequila\K8S\SchemaGenerator\JsonSchema\DataType\DataTypeInterface;
+use Klass8s\K8SchemaGenerator\Codegen\Context;
+use Klass8s\K8SchemaGenerator\Codegen\PHPTypesService;
+use Klass8s\K8SchemaGenerator\Codegen\Type\ClassName;
+use Klass8s\K8SchemaGenerator\Codegen\Type\PHPClass;
+use Klass8s\K8SchemaGenerator\JsonSchema\DataType\DataTypeInterface;
 
 interface VOClassGeneratorInterface
 {

@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
-namespace Tequila\K8S\SchemaGenerator\App\DependencyInjection\Compiler;
+namespace Klass8s\K8SchemaGenerator\App\DependencyInjection\Compiler;
 
 use Symfony\Component\DependencyInjection\ContainerBuilder;
 use Symfony\Component\DependencyInjection\Compiler\CompilerPassInterface;
-use Tequila\K8S\SchemaGenerator\App\Console\Command\GenerateCommand;
-use Tequila\K8S\SchemaGenerator\App\Console\Command\SchemaFetchCommand;
-use Tequila\K8S\SchemaGenerator\App\Console\Command\SchemaVersionsCommand;
+use Klass8s\K8SchemaGenerator\App\Console\Command\GenerateCommand;
+use Klass8s\K8SchemaGenerator\App\Console\Command\SchemaFetchCommand;
+use Klass8s\K8SchemaGenerator\App\Console\Command\SchemaVersionsCommand;
 
 class RemoveDefaultSymfonyCommandsPass implements CompilerPassInterface
 {

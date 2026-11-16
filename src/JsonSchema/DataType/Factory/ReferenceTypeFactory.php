@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace Tequila\K8S\SchemaGenerator\JsonSchema\DataType\Factory;
+namespace Klass8s\K8SchemaGenerator\JsonSchema\DataType\Factory;
 
-use Tequila\K8S\SchemaGenerator\JsonSchema\DataType\DataTypeInterface;
-use Tequila\K8S\SchemaGenerator\JsonSchema\DataType\DataTypesService;
-use Tequila\K8S\SchemaGenerator\JsonSchema\DataType\ReferenceType;
+use Klass8s\K8SchemaGenerator\JsonSchema\DataType\DataTypeInterface;
+use Klass8s\K8SchemaGenerator\JsonSchema\DataType\DataTypesService;
+use Klass8s\K8SchemaGenerator\JsonSchema\DataType\ReferenceType;
 
 class ReferenceTypeFactory implements TypeUnawareFactoryInterface
 {

@@ -2,13 +2,13 @@
 
 declare(strict_types=1);
 
-namespace Tequila\K8S\SchemaGenerator\Codegen\Processor\Property;
+namespace Klass8s\K8SchemaGenerator\Codegen\Processor\Property;
 
 use Nette\PhpGenerator\ClassType;
 use Nette\PhpGenerator\Property;
-use Tequila\K8S\SchemaGenerator\Codegen\Context;
-use Tequila\K8S\SchemaGenerator\Codegen\Type\ClassName;
-use Tequila\K8S\SchemaGenerator\JsonSchema\DataType\PropertyDefinition;
+use Klass8s\K8SchemaGenerator\Codegen\Context;
+use Klass8s\K8SchemaGenerator\Codegen\Type\ClassName;
+use Klass8s\K8SchemaGenerator\JsonSchema\DataType\PropertyDefinition;
 
 abstract class AbstractPropertyProcessor implements PropertyProcessorInterface
 {

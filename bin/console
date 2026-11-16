@@ -2,7 +2,7 @@
 <?php
 
 use Symfony\Bundle\FrameworkBundle\Console\Application;
-use Tequila\K8S\SchemaGenerator\Kernel;
+use Klass8s\K8SchemaGenerator\Kernel;
 
 if (!is_dir(dirname(__DIR__).'/vendor')) {
     throw new LogicException('Dependencies are missing. Try running "composer install".');

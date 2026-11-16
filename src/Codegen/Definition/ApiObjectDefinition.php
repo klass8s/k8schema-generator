@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace Tequila\K8S\SchemaGenerator\Codegen\Definition;
+namespace Klass8s\K8SchemaGenerator\Codegen\Definition;
 
-use Tequila\K8S\SchemaGenerator\App\SemVer\Version;
-use Tequila\K8S\SchemaGenerator\JsonSchema\DataType\ObjectType;
-use Tequila\K8S\SchemaGenerator\JsonSchema\DataType\PropertyDefinition;
+use Klass8s\K8SchemaGenerator\App\SemVer\Version;
+use Klass8s\K8SchemaGenerator\JsonSchema\DataType\ObjectType;
+use Klass8s\K8SchemaGenerator\JsonSchema\DataType\PropertyDefinition;
 
 final readonly class ApiObjectDefinition
 {

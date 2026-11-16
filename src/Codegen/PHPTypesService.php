@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace Tequila\K8S\SchemaGenerator\Codegen;
+namespace Klass8s\K8SchemaGenerator\Codegen;
 
-use Tequila\K8S\SchemaGenerator\Codegen\Type\PHPType;
-use Tequila\K8S\SchemaGenerator\Codegen\TypeResolver\TypeResolverInterface;
-use Tequila\K8S\SchemaGenerator\JsonSchema\DataType\DataTypeInterface;
+use Klass8s\K8SchemaGenerator\Codegen\Type\PHPType;
+use Klass8s\K8SchemaGenerator\Codegen\TypeResolver\TypeResolverInterface;
+use Klass8s\K8SchemaGenerator\JsonSchema\DataType\DataTypeInterface;
 
 final readonly class PHPTypesService
 {

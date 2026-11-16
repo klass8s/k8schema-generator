@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Tequila\K8S\SchemaGenerator\App\Util;
+namespace Klass8s\K8SchemaGenerator\App\Util;
 
-use Tequila\K8S\SchemaGenerator\Codegen\Context;
+use Klass8s\K8SchemaGenerator\Codegen\Context;
 
 class ClassUtil
 {

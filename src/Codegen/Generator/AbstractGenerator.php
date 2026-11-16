@@ -2,24 +2,24 @@
 
 declare(strict_types=1);
 
-namespace Tequila\K8S\SchemaGenerator\Codegen\Generator;
+namespace Klass8s\K8SchemaGenerator\Codegen\Generator;
 
-use Tequila\K8S\SchemaGenerator\App\Event\CodeGeneration\ClassGenerationEventInterface;
-use Tequila\K8S\SchemaGenerator\App\Event\CodeGeneration\ClassInProgressEvent;
-use Tequila\K8S\SchemaGenerator\App\Event\CodeGeneration\ClassNameEvent;
-use Tequila\K8S\SchemaGenerator\App\Event\CodeGeneration\JsonSerializeMethodEvent;
-use Tequila\K8S\SchemaGenerator\App\Event\CodeGeneration\PHPClassEventInterface;
-use Tequila\K8S\SchemaGenerator\Codegen\Context;
-use Tequila\K8S\SchemaGenerator\Codegen\PHPTypesService;
-use Tequila\K8S\SchemaGenerator\Codegen\Processor\PropertyProcessingService;
-use Tequila\K8S\SchemaGenerator\Codegen\Type\ClassName;
-use Tequila\K8S\SchemaGenerator\Codegen\Type\PHPClass;
+use Klass8s\K8SchemaGenerator\App\Event\CodeGeneration\ClassGenerationEventInterface;
+use Klass8s\K8SchemaGenerator\App\Event\CodeGeneration\ClassInProgressEvent;
+use Klass8s\K8SchemaGenerator\App\Event\CodeGeneration\ClassNameEvent;
+use Klass8s\K8SchemaGenerator\App\Event\CodeGeneration\JsonSerializeMethodEvent;
+use Klass8s\K8SchemaGenerator\App\Event\CodeGeneration\PHPClassEventInterface;
+use Klass8s\K8SchemaGenerator\Codegen\Context;
+use Klass8s\K8SchemaGenerator\Codegen\PHPTypesService;
+use Klass8s\K8SchemaGenerator\Codegen\Processor\PropertyProcessingService;
+use Klass8s\K8SchemaGenerator\Codegen\Type\ClassName;
+use Klass8s\K8SchemaGenerator\Codegen\Type\PHPClass;
 use Nette\PhpGenerator\ClassType;
 use Nette\PhpGenerator\Method;
 use Nette\PhpGenerator\Property;
 use Symfony\Contracts\EventDispatcher\EventDispatcherInterface;
-use Tequila\K8S\SchemaGenerator\JsonSchema\DataType\ArrayType;
-use Tequila\K8S\SchemaGenerator\JsonSchema\DataType\PropertyDefinition;
+use Klass8s\K8SchemaGenerator\JsonSchema\DataType\ArrayType;
+use Klass8s\K8SchemaGenerator\JsonSchema\DataType\PropertyDefinition;
 
 abstract class AbstractGenerator
 {

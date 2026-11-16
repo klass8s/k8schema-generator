@@ -5,8 +5,8 @@ declare(strict_types=1);
 
 use Symfony\Component\ErrorHandler\Debug;
 use Symfony\Component\Dotenv\Dotenv;
-use Tequila\K8S\SchemaGenerator\App\Console\AppConsole;
-use Tequila\K8S\SchemaGenerator\Kernel;
+use Klass8s\K8SchemaGenerator\App\Console\AppConsole;
+use Klass8s\K8SchemaGenerator\Kernel;
 
 $autoloadPath = $_composer_autoload_path ?? dirname(__DIR__) . '/vendor/autoload.php';
 require_once $autoloadPath;
@@ -26,7 +26,7 @@ if (is_file(dirname(__DIR__).'/.env')) {
 $kernel = new Kernel($env, $debug);
 
 $app = new AppConsole($kernel);
-$app->setName('k8s-schema-generator');
+$app->setName('k8schema-generator');
 $app->setVersion('dev-main');
 
 exit($app->run());

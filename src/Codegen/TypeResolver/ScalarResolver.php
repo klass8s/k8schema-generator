@@ -2,15 +2,15 @@
 
 declare(strict_types=1);
 
-namespace Tequila\K8S\SchemaGenerator\Codegen\TypeResolver;
+namespace Klass8s\K8SchemaGenerator\Codegen\TypeResolver;
 
-use Tequila\K8S\SchemaGenerator\Codegen\Context;
-use Tequila\K8S\SchemaGenerator\Codegen\PHPTypesService;
-use Tequila\K8S\SchemaGenerator\Codegen\Type\PHPType;
-use Tequila\K8S\SchemaGenerator\JsonSchema\DataType\BoolType;
-use Tequila\K8S\SchemaGenerator\JsonSchema\DataType\DataTypeInterface;
-use Tequila\K8S\SchemaGenerator\JsonSchema\DataType\IntegerType;
-use Tequila\K8S\SchemaGenerator\JsonSchema\DataType\NumberType;
+use Klass8s\K8SchemaGenerator\Codegen\Context;
+use Klass8s\K8SchemaGenerator\Codegen\PHPTypesService;
+use Klass8s\K8SchemaGenerator\Codegen\Type\PHPType;
+use Klass8s\K8SchemaGenerator\JsonSchema\DataType\BoolType;
+use Klass8s\K8SchemaGenerator\JsonSchema\DataType\DataTypeInterface;
+use Klass8s\K8SchemaGenerator\JsonSchema\DataType\IntegerType;
+use Klass8s\K8SchemaGenerator\JsonSchema\DataType\NumberType;
 
 class ScalarResolver extends AbstractTypeResolver
 {

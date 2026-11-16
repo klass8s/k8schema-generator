@@ -2,11 +2,11 @@
 
 declare(strict_types=1);
 
-namespace Tequila\K8S\SchemaGenerator\JsonSchema\DataType;
+namespace Klass8s\K8SchemaGenerator\JsonSchema\DataType;
 
-use Tequila\K8S\SchemaGenerator\JsonSchema\DataType\Factory\DataTypeFactoryInterface;
-use Tequila\K8S\SchemaGenerator\JsonSchema\DataType\Factory\TypeAwareFactoryInterface;
-use Tequila\K8S\SchemaGenerator\JsonSchema\DataType\Factory\TypeUnawareFactoryInterface;
+use Klass8s\K8SchemaGenerator\JsonSchema\DataType\Factory\DataTypeFactoryInterface;
+use Klass8s\K8SchemaGenerator\JsonSchema\DataType\Factory\TypeAwareFactoryInterface;
+use Klass8s\K8SchemaGenerator\JsonSchema\DataType\Factory\TypeUnawareFactoryInterface;
 
 final class DataTypesService
 {

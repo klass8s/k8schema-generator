@@ -2,16 +2,16 @@
 
 declare(strict_types=1);
 
-namespace Tequila\K8S\SchemaGenerator\Codegen\Generator;
+namespace Klass8s\K8SchemaGenerator\Codegen\Generator;
 
-use Tequila\K8S\SchemaGenerator\App\Event\CodeGeneration\APIClassGeneratedEvent;
-use Tequila\K8S\SchemaGenerator\App\Event\CodeGeneration\APIClassGenerationEvent;
-use Tequila\K8S\SchemaGenerator\App\Event\CodeGeneration\ClassGenerationEventInterface;
-use Tequila\K8S\SchemaGenerator\App\Event\CodeGeneration\PHPClassEventInterface;
-use Tequila\K8S\SchemaGenerator\Codegen\Context;
-use Tequila\K8S\SchemaGenerator\Codegen\Definition\ApiObjectDefinition;
-use Tequila\K8S\SchemaGenerator\Codegen\Type\ClassName;
-use Tequila\K8S\SchemaGenerator\Codegen\Type\PHPClass;
+use Klass8s\K8SchemaGenerator\App\Event\CodeGeneration\APIClassGeneratedEvent;
+use Klass8s\K8SchemaGenerator\App\Event\CodeGeneration\APIClassGenerationEvent;
+use Klass8s\K8SchemaGenerator\App\Event\CodeGeneration\ClassGenerationEventInterface;
+use Klass8s\K8SchemaGenerator\App\Event\CodeGeneration\PHPClassEventInterface;
+use Klass8s\K8SchemaGenerator\Codegen\Context;
+use Klass8s\K8SchemaGenerator\Codegen\Definition\ApiObjectDefinition;
+use Klass8s\K8SchemaGenerator\Codegen\Type\ClassName;
+use Klass8s\K8SchemaGenerator\Codegen\Type\PHPClass;
 
 class APIClassGenerator extends AbstractGenerator
 {

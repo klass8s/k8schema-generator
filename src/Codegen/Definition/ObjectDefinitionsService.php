@@ -2,12 +2,12 @@
 
 declare(strict_types=1);
 
-namespace Tequila\K8S\SchemaGenerator\Codegen\Definition;
+namespace Klass8s\K8SchemaGenerator\Codegen\Definition;
 
-use Tequila\K8S\SchemaGenerator\App\SemVer\VersionsService;
-use Tequila\K8S\SchemaGenerator\JsonSchema\DataType\DataTypeInterface;
-use Tequila\K8S\SchemaGenerator\JsonSchema\DataType\ObjectType;
-use Tequila\K8S\SchemaGenerator\JsonSchema\TypesMap;
+use Klass8s\K8SchemaGenerator\App\SemVer\VersionsService;
+use Klass8s\K8SchemaGenerator\JsonSchema\DataType\DataTypeInterface;
+use Klass8s\K8SchemaGenerator\JsonSchema\DataType\ObjectType;
+use Klass8s\K8SchemaGenerator\JsonSchema\TypesMap;
 
 final readonly class ObjectDefinitionsService
 {

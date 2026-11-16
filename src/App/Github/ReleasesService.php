@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace Tequila\K8S\SchemaGenerator\App\Github;
+namespace Klass8s\K8SchemaGenerator\App\Github;
 
 use Github\Client;
 

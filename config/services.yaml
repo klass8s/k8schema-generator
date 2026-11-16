@@ -1,19 +1,19 @@
 parameters:
-    tequila.k8schema_generator.json_schema.url_template: 'https://raw.githubusercontent.com/yannh/kubernetes-json-schema/master/{version}/_definitions.json'
-    tequila.k8schema_generator.json_schema.versions: '%env(json:K8S_JSON_SCHEMA_VERSIONS)%'
+    k8schema_generator.json_schema.url_template: 'https://raw.githubusercontent.com/yannh/kubernetes-json-schema/master/{version}/_definitions.json'
+    k8schema_generator.json_schema.versions: '%env(json:K8S_JSON_SCHEMA_VERSIONS)%'
     # Sometimes metadata type defined as `object` in some CRDs, for example, in CRDs, defined by Upbound AWS Provider.
     # Specifying env var `K8S_METADATA_CLASS` will replace `metadata` property type in such
     # classes to the value of this env var (probably FQCN). This may be needed if you don't want to generate
     # a new class for each metadata property in dozens of CRD classes, or if you want your classes to be compatible
-    # with some library, for example, with `tequila/k8s-schema`, where `APIResourceInterface` requires
+    # with some library, for example, with `klass8s/k8schema`, where `APIResourceInterface` requires
     # method `metadata()` to return it's "own" `ObjectMeta` instance
-    tequila.k8schema_generator.crd_metadata_class: '%env(default::K8S_CRD_METADATA_CLASS)%'
+    k8schema_generator.crd_metadata_class: '%env(default::K8S_CRD_METADATA_CLASS)%'
     # You may want to replace the default generated `ObjectMeta` class type for `metadata` properties
-    # with some predefined type, for example, `Tequila\K8S\Schema\ObjectMeta` for your classes
-    # to be compatible with `tequila/k8s-schema` and `tequila/k8s` libraries.
+    # with some predefined type, for example, the `ObjectMeta` of an existing package such as
+    # `klass8s/k8schema`, for your classes to be compatible with the libraries built on it.
     # Specifying this env var `K8S_METADATA_CLASS` will result in a type of `metadata` properties
     # to be replaced with the value of this env var (probably FQCN)
-    tequila.k8schema_generator.metadata_class: '%env(default::K8S_METADATA_CLASS)%'
+    k8schema_generator.metadata_class: '%env(default::K8S_METADATA_CLASS)%'
 
 services:
     _defaults:
@@ -21,38 +21,38 @@ services:
         autoconfigure: true
         bind:
             $srcDir: '%kernel.project_dir%/src'
-            $jsonSchemaUrlTemplate: '%tequila.k8schema_generator.json_schema.url_template%'
-            $jsonSchemaVersions: '%tequila.k8schema_generator.json_schema.versions%'
-            $crdMetadataClass: '%tequila.k8schema_generator.crd_metadata_class%'
-            $metadataClass: '%tequila.k8schema_generator.crd_metadata_class%'
+            $jsonSchemaUrlTemplate: '%k8schema_generator.json_schema.url_template%'
+            $jsonSchemaVersions: '%k8schema_generator.json_schema.versions%'
+            $crdMetadataClass: '%k8schema_generator.crd_metadata_class%'
+            $metadataClass: '%k8schema_generator.crd_metadata_class%'
     _instanceof:
-        Tequila\K8S\SchemaGenerator\JsonSchema\DataType\Factory\DataTypeFactoryInterface:
-            tags: [ !php/const Tequila\K8S\SchemaGenerator\App\DependencyInjection\Tags::DATA_TYPE_FACTORY ]
-        Tequila\K8S\SchemaGenerator\Codegen\TypeResolver\TypeResolverInterface:
-            tags: [ !php/const Tequila\K8S\SchemaGenerator\App\DependencyInjection\Tags::TYPE_RESOLVER ]
-        Tequila\K8S\SchemaGenerator\Codegen\ValueObject\VOClassGeneratorInterface:
-            tags: [ !php/const Tequila\K8S\SchemaGenerator\App\DependencyInjection\Tags::VO_CLASS_GENERATOR ]
-        Tequila\K8S\SchemaGenerator\Codegen\Processor\Property\PropertyDefinitionProcessorInterface:
-            tags: [ !php/const Tequila\K8S\SchemaGenerator\App\DependencyInjection\Tags::PROPERTY_DEFINITION_PROCESSOR ]
-        Tequila\K8S\SchemaGenerator\Codegen\Processor\Property\PropertyProcessorInterface:
-            tags: [ !php/const Tequila\K8S\SchemaGenerator\App\DependencyInjection\Tags::PROPERTY_PROCESSOR ]
+        Klass8s\K8SchemaGenerator\JsonSchema\DataType\Factory\DataTypeFactoryInterface:
+            tags: [ !php/const Klass8s\K8SchemaGenerator\App\DependencyInjection\Tags::DATA_TYPE_FACTORY ]
+        Klass8s\K8SchemaGenerator\Codegen\TypeResolver\TypeResolverInterface:
+            tags: [ !php/const Klass8s\K8SchemaGenerator\App\DependencyInjection\Tags::TYPE_RESOLVER ]
+        Klass8s\K8SchemaGenerator\Codegen\ValueObject\VOClassGeneratorInterface:
+            tags: [ !php/const Klass8s\K8SchemaGenerator\App\DependencyInjection\Tags::VO_CLASS_GENERATOR ]
+        Klass8s\K8SchemaGenerator\Codegen\Processor\Property\PropertyDefinitionProcessorInterface:
+            tags: [ !php/const Klass8s\K8SchemaGenerator\App\DependencyInjection\Tags::PROPERTY_DEFINITION_PROCESSOR ]
+        Klass8s\K8SchemaGenerator\Codegen\Processor\Property\PropertyProcessorInterface:
+            tags: [ !php/const Klass8s\K8SchemaGenerator\App\DependencyInjection\Tags::PROPERTY_PROCESSOR ]
 
-    Tequila\K8S\SchemaGenerator\:
+    Klass8s\K8SchemaGenerator\:
         resource: '../src/'
         exclude:
             - '../src/Kernel.php'
 
-    Tequila\K8S\SchemaGenerator\JsonSchema\DataType\DataTypesService:
-        arguments: [!tagged_iterator { tag: !php/const Tequila\K8S\SchemaGenerator\App\DependencyInjection\Tags::DATA_TYPE_FACTORY }]
+    Klass8s\K8SchemaGenerator\JsonSchema\DataType\DataTypesService:
+        arguments: [!tagged_iterator { tag: !php/const Klass8s\K8SchemaGenerator\App\DependencyInjection\Tags::DATA_TYPE_FACTORY }]
 
-    Tequila\K8S\SchemaGenerator\Codegen\PHPTypesService:
-        arguments: [!tagged_iterator { tag: !php/const Tequila\K8S\SchemaGenerator\App\DependencyInjection\Tags::TYPE_RESOLVER }]
+    Klass8s\K8SchemaGenerator\Codegen\PHPTypesService:
+        arguments: [!tagged_iterator { tag: !php/const Klass8s\K8SchemaGenerator\App\DependencyInjection\Tags::TYPE_RESOLVER }]
 
-    Tequila\K8S\SchemaGenerator\Codegen\ValueObjectsService:
+    Klass8s\K8SchemaGenerator\Codegen\ValueObjectsService:
         arguments:
-            $generators: !tagged_iterator { tag: !php/const Tequila\K8S\SchemaGenerator\App\DependencyInjection\Tags::VO_CLASS_GENERATOR }
+            $generators: !tagged_iterator { tag: !php/const Klass8s\K8SchemaGenerator\App\DependencyInjection\Tags::VO_CLASS_GENERATOR }
 
-    Tequila\K8S\SchemaGenerator\Codegen\Processor\PropertyProcessingService:
+    Klass8s\K8SchemaGenerator\Codegen\Processor\PropertyProcessingService:
         arguments:
-            - !tagged_iterator { tag: !php/const Tequila\K8S\SchemaGenerator\App\DependencyInjection\Tags::PROPERTY_DEFINITION_PROCESSOR }
-            - !tagged_iterator { tag: !php/const Tequila\K8S\SchemaGenerator\App\DependencyInjection\Tags::PROPERTY_PROCESSOR }
+            - !tagged_iterator { tag: !php/const Klass8s\K8SchemaGenerator\App\DependencyInjection\Tags::PROPERTY_DEFINITION_PROCESSOR }
+            - !tagged_iterator { tag: !php/const Klass8s\K8SchemaGenerator\App\DependencyInjection\Tags::PROPERTY_PROCESSOR }

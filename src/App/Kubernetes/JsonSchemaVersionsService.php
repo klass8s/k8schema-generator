@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Tequila\K8S\SchemaGenerator\App\Kubernetes;
+namespace Klass8s\K8SchemaGenerator\App\Kubernetes;
 
-use Tequila\K8S\SchemaGenerator\App\Github\FileTreeService;
+use Klass8s\K8SchemaGenerator\App\Github\FileTreeService;
 
 final readonly class JsonSchemaVersionsService
 {

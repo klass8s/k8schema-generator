@@ -2,9 +2,9 @@
 
 declare(strict_types=1);
 
-namespace Tequila\K8S\SchemaGenerator\Codegen\Definition;
+namespace Klass8s\K8SchemaGenerator\Codegen\Definition;
 
-use Tequila\K8S\SchemaGenerator\JsonSchema\TypesMap;
+use Klass8s\K8SchemaGenerator\JsonSchema\TypesMap;
 
 final readonly class ApiObjectDefinitionsMap implements \IteratorAggregate
 {
