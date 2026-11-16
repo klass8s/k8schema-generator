@@ -15,7 +15,7 @@ and what a pull request must satisfy to be merged.
 
 ## How the generator is organised
 
-The application is a Symfony console app (namespace root in `composer.json`, `src/`).
+The application is a Symfony console app, namespace `Klass8s\K8SchemaGenerator\` in `src/`.
 
 - `src/JsonSchema/` reads the JSON schema into a map of data types (`JsonSchemaService`, `TypesMap`,
   the factories under `DataType/Factory/`).
